@@ -39,17 +39,17 @@
                     <div class="col l-9 m-9 c-12">
                         <div class="main__content">
                             <!-- home -->
-                            <div class="content__item active">
+                            <div class="content__item">
                                 <div class="content__home">
                                     
                                     <div class="home__balance grid">
                                         <h4 class="balance__title">Số dư tài khoản</h4>
                                         <div class="balance__card row no-gutters">
-                                            <div class="card__item card__usdt col l-5 m-5 c-6">
+                                            <div class="card__item col l-5 m-5 c-6">
                                                 <div class="card__title">Số dư USDT</div>
                                                 <div class="card__number">1,250.00</div>
                                             </div>
-                                            <div class="card__item card__coin col l-5 l-o-2 m-5 m-o-2 c-6">
+                                            <div class="card__item col l-5 l-o-2 m-5 m-o-2 c-6">
                                                 <div class="card__title">Số dư Coin</div>
                                                 <div class="card__number">25,800</div>
                                             </div>
@@ -57,8 +57,11 @@
                                     </div>
 
                                     <div class="home__recent">
-                                        <h4 class="recent__title">Hoạt động gần đây</h4>
-                                        <table class="recent__act" border="1">
+                                        <div class="recent__header">
+                                            <h4 class="recent__title">Hoạt động gần đây</h4>
+                                            <div class="recent__convert btn btn__outline">Quy đổi điểm</div>
+                                        </div>
+                                        <table class="recent__act">
                                             <thead>
                                                 <tr>
                                                     <th>Loại giao dịch</th>
@@ -74,28 +77,37 @@
                                                     <td>27/02/2025 - 10:10</td>
                                                     <td>Thành công</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Quy đổi USDT -> Coin</td>
+                                                    <td>1000 USDT</td>
+                                                    <td>27/02/2025 - 10:10</td>
+                                                    <td>Thành công</td>
+                                                </tr>
                                             </tbody>
-                                        </table>
-                                        </div>                                        
+                                        </table>                                    
                                     </div>
 
                                     <div class="home__suggest grid">
                                         <div class="suggest__header">
                                             <h4 class="suggest__title">Nhiệm vụ đề xuất</h4>
-                                            <button class="suggest__all btn btn__outline">Xem tất cả</button>
+                                            <button class="btn__suggest--read btn__outline">Xem tất cả</button>
                                         </div>
                                         <div class="suggest__task row no-gutters">
                                             <div class="task__card col l-5 m-5 c-12">
                                                 <div class="task__cars--title">Kiểm tra smart contract</div>
                                                 <div class="task__card--content">Kiểm tra và báo cáo lỗi của dự án ABC</div>
-                                                <div class="task__card--coin">500 Coin</div>
-                                                <div class="task__card--time">01:45:30</div>
+                                                <div class="task__card--footer">
+                                                    <div class="card__coin">500 Coin</div>
+                                                    <div class="card__time">01:45:30</div>
+                                                </div>
                                             </div>
                                             <div class="task__card col l-5 l-o-2 m-5 m-o-2 c-12">
                                                 <div class="task__cars--title">Tham gia AMA</div>
                                                 <div class="task__card--content">Tham gia và cài đặt câu hỏi cho dự án XYZ </div>
-                                                <div class="task__card--coin">300 Coin</div>
-                                                <div class="task__card--time">03:20:15</div>
+                                                <div class="task__card--footer">
+                                                    <div class="card__coin">300 Coin</div>
+                                                    <div class="card__time">03:25:10</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -103,8 +115,38 @@
                             </div>
 
                             <!-- tasks list -->
-                            <div class="content__item">                                
-                                <div class="content__task">Danh sách nhiệm vụ</div>
+                            <div class="content__item active">                                
+                                <div class="content__task">
+                                    <!-- button filter -->
+                                    <div class="task__filter--btn">
+                                        <div class="btn__filter--new btn">Nhiệm vụ mới</div>
+                                        <div class="btn__filter--current btn btn__outline">Đang thực hiện</div>
+                                    </div>
+
+                                    <!-- select filter -->
+                                    <div class="task__filter--select">
+                                        <div class="task__filter--date">Nhiệm vụ ngày 25/2/2025</div>
+                                        <select class="task__filter--input">
+                                            <option value="1">Thời gian</option>
+                                            <option value="2">Điểm thưởng</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- task list -->
+                                    <div class="task__list grid">
+                                        <div class="row no-gutters">
+                                            <div class="task__item col l-12 m-12 c-12">
+                                                <div class="task__item--title">Nhiệm vụ 1:</div>
+                                                <div class="task__item--infor">
+                                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                                    <div class="task__item--coin">500</div>
+                                                    <div class="task__item--time">1:30:45</div>
+                                                </div>
+                                                <button class="btn__task--submit btn" >Nhận nhiệm vụ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- history -->

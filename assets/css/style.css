@@ -4,6 +4,7 @@
 .main{width: 100vw;}
 
 /* header */
+header{  padding: 0 20px;}
 .header{
     height: var(--height-header);
     display: flex;
@@ -37,36 +38,30 @@
     /* height: 100vh; */
     height: calc(100vh - var(--height-footer) - var(--height-header));
     border-right: 1px solid #888;
-    padding: 10px;
+    padding: 20px 20px 0;
 }
 .nav_item{
     display: block;
-    padding: 10px 0;
+    padding: 10px 4px;
     margin-bottom: 8px;
 }
 .nav_item.active, .nav_item:hover{
     border-radius: 5px;
     border-left: 2px solid var(--color-submit);
-    background-color: var(--color-tag3);
+    background-color: var(--color-cyan);
 }
 /* main content*/
+.main__content{padding-top: 30px;}
 .content__item{
-    display: none;
+    display: none;padding: 0 30px;
 }
 .content__item.active{
     display: block;
 }
-
-/* home */
-.home__balance{
-    margin-top: 20px;
+.content__item h4{
+    font-weight: 600;
 }
-.home__balance h4{
-    font-weight: 500;
-}
-.balance__card{
-    /* padding: 20px; */
-}
+/* home balance */
 .balance__card.row.no-gutters .card__item{
     border-radius: 5px;
     margin-top: 10px;
@@ -83,20 +78,52 @@
     font-weight: 600;
     font-size: 1.9rem;
 }
-/* hoome suggest task */
+/* home recent activity */
+.recent__header, .suggest__header, .task__card--footer, .task__filter--select{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+.recent__header, .suggest__header{margin: 30px 0 20px 0;}
+.recent__convert{
+    background-color: var(--color-submit);
+}
+
+/* home suggest task */
 /* .home__suggest{} */
-.suggest__header{    display: flex; align-items: center;justify-content: space-between;}
 /* .suggest__title{} */
-.suggest__all{ color: var(--color-submit);}
+.btn__suggest--read{ color: var(--color-submit);}
 
 .task__card{
     padding: 20px !important;
+    margin-bottom: 10px;
     border-radius: 5px;
-    border: 1px solid var(--color-card);    
+    border: 1px solid var(--color-table-head);  
+    cursor: pointer;  
 }
-.task__cars--title{
-    font-weight: 500;
+.task__cars--title{    font-weight: 500;}
+.task__card--content{font-size: 1.5rem; font-weight: 300;}
+.task__card--footer{
+    margin: 10px 0 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-table-head);
 }
+/* filter task button */
+.task__filter--btn{display: flex;justify-content: space-around;}
+.btn__filter--new{background-color: var(--color-submit);}
+.btn__filter--current{color: var(--color-submit);}
+/* .task__filter--date{} */
+.task__filter--input{
+    outline: none;
+    border: 1px solid var(--color-card);
+    border-radius: 5px;
+    padding: 5px;
+}
+.task__item{
+    border: 1px solid var(--color-table-head);
+    border-radius: 5px;
+}
+.btn__task--submit{background-color: var(--color-submit);}
 /* footer */
 .copy-right{
     height: var(--height-footer);
