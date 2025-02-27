@@ -1,0 +1,49 @@
+:root{
+    --color-card: #EFEFEF;
+    --color-success: #00FF00;
+    --color-submit: #007BFF;
+    --color-over: #FE2020;
+    --color-processing: #FFD700;
+    --color-tag1: #DBBFFF;/*mkt*/
+    --color-tag2: #FCDFBD;/*public*/
+    --color-tag3: #E6F7FF;/*app, smart*/
+    --color-tag4: #E5F5E4;/*test*/
+    --height-header: 46px;
+    --height-footer: 30px;
+
+}
+*{margin: 0;padding: 0;box-sizing: border-box;}
+
+html{
+    font-size: 62.5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+li{list-style: none;}
+
+/* table */
+table{ width: 100%;
+border-radius: 5px;}
+tr{ display: flex;}
+th, td{
+    display: block;
+    border: none;
+    flex: 1;
+    text-align: left;
+}
+th{background-color: var(--color-card);}
+
+/* button */
+button, .btn{
+    display: block;
+    outline: none;
+    border: none;    
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+.btn__outline{     
+    background-color: transparent;
+    border: 1px solid currentColor;
+}

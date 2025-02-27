@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="app">
+        <header id="">
+            <div class="grid">
+                <!-- header -->
+                <div class="header">
+                    <div class="header__nav--title"><h1>Trang chủ</h1></div>
+                    <div class="header__user">
+                        <div class="user__name">User Name</div>
+                        <div class="user__img"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main id="main">
+            <div class="grid">                
+                <div class="row no-gutters">
+                    <!-- main nav -->
+                    <nav class="col l-3 m-3 c-0">
+                        <ul class="main__nav">
+                            <li class="nav_item active">Trang chủ</li>
+                            <li class="nav_item">Danh sách nhiệm vụ</li>
+                            <li class="nav_item">Lịch sử giao dịch</li>
+                            <li class="nav_item">Cài đặt tài khoản</li>
+                        </ul>
+                    </nav>
+                    <!-- main content -->
+                    <div class="col l-9 m-9 c-12">
+                        <div class="main__content">
+                            <!-- home -->
+                            <div class="content__item active">
+                                <div class="content__home">
+                                    
+                                    <div class="home__balance grid">
+                                        <h4 class="balance__title">Số dư tài khoản</h4>
+                                        <div class="balance__card row no-gutters">
+                                            <div class="card__item card__usdt col l-5 m-5 c-6">
+                                                <div class="card__title">Số dư USDT</div>
+                                                <div class="card__number">1,250.00</div>
+                                            </div>
+                                            <div class="card__item card__coin col l-5 l-o-2 m-5 m-o-2 c-6">
+                                                <div class="card__title">Số dư Coin</div>
+                                                <div class="card__number">25,800</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="home__recent">
+                                        <h4 class="recent__title">Hoạt động gần đây</h4>
+                                        <table class="recent__act" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Loại giao dịch</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Thời gian</th>
+                                                    <th>Trạng thái</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Quy đổi USDT -> Coin</td>
+                                                    <td>1000 USDT</td>
+                                                    <td>27/02/2025 - 10:10</td>
+                                                    <td>Thành công</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>                                        
+                                    </div>
+
+                                    <div class="home__suggest grid">
+                                        <div class="suggest__header">
+                                            <h4 class="suggest__title">Nhiệm vụ đề xuất</h4>
+                                            <button class="suggest__all btn btn__outline">Xem tất cả</button>
+                                        </div>
+                                        <div class="suggest__task row no-gutters">
+                                            <div class="task__card col l-5 m-5 c-12">
+                                                <div class="task__cars--title">Kiểm tra smart contract</div>
+                                                <div class="task__card--content">Kiểm tra và báo cáo lỗi của dự án ABC</div>
+                                                <div class="task__card--coin">500 Coin</div>
+                                                <div class="task__card--time">01:45:30</div>
+                                            </div>
+                                            <div class="task__card col l-5 l-o-2 m-5 m-o-2 c-12">
+                                                <div class="task__cars--title">Tham gia AMA</div>
+                                                <div class="task__card--content">Tham gia và cài đặt câu hỏi cho dự án XYZ </div>
+                                                <div class="task__card--coin">300 Coin</div>
+                                                <div class="task__card--time">03:20:15</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- tasks list -->
+                            <div class="content__item">                                
+                                <div class="content__task">Danh sách nhiệm vụ</div>
+                            </div>
+
+                            <!-- history -->
+                            <div class="content__item">
+                                <div class="content__history">Lịch sử giao dịch</div>
+                            </div>
+
+                            <!-- setting account -->
+                            <div class="content__item">
+                                <div class="content__setting">Cài đặt tài khoản</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- footer -->
+        <footer id="footer">
+            <div class="grid">
+                <div class="copy-right">@copyright 2025 Hệ thống giao dịch bằng tiền điện tử</div>
+            </div>
+        </footer>
+    </div>
+</body>
+<script src="js/main.js"></script>
+</html>

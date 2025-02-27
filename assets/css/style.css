@@ -1,0 +1,106 @@
+.app{width: 100vw;
+/* padding: 0 20px; */
+}
+.main{width: 100vw;}
+
+/* header */
+.header{
+    height: var(--height-header);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__nav--title{
+    font-size: 1.6rem;
+}
+.header__user{
+    display: flex;
+    align-items: center;
+}
+.user__name{
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+.user__img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: url("") center / cover grey;
+}
+
+/* nav */
+.col{
+    /* background-clip: content-box; */
+    font-size: 1.6rem;
+}
+.main__nav{
+    /* height: 100vh; */
+    height: calc(100vh - var(--height-footer) - var(--height-header));
+    border-right: 1px solid #888;
+    padding: 10px;
+}
+.nav_item{
+    display: block;
+    padding: 10px 0;
+    margin-bottom: 8px;
+}
+.nav_item.active, .nav_item:hover{
+    border-radius: 5px;
+    border-left: 2px solid var(--color-submit);
+    background-color: var(--color-tag3);
+}
+/* main content*/
+.content__item{
+    display: none;
+}
+.content__item.active{
+    display: block;
+}
+
+/* home */
+.home__balance{
+    margin-top: 20px;
+}
+.home__balance h4{
+    font-weight: 500;
+}
+.balance__card{
+    /* padding: 20px; */
+}
+.balance__card.row.no-gutters .card__item{
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-card);
+}
+.card__title{
+    color: #888;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.card__number{
+    font-weight: 600;
+    font-size: 1.9rem;
+}
+/* hoome suggest task */
+/* .home__suggest{} */
+.suggest__header{    display: flex; align-items: center;justify-content: space-between;}
+/* .suggest__title{} */
+.suggest__all{ color: var(--color-submit);}
+
+.task__card{
+    padding: 20px !important;
+    border-radius: 5px;
+    border: 1px solid var(--color-card);    
+}
+.task__cars--title{
+    font-weight: 500;
+}
+/* footer */
+.copy-right{
+    height: var(--height-footer);
+    line-height: var(--height-footer);
+    font-size: 1.6rem;
+    text-align: center;
+}
