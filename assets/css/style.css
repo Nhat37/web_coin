@@ -1,15 +1,11 @@
-.app{width: 100vw;
-/* padding: 0 20px; */
-}
-.main{width: 100vw;}
+.app{width: 100vw;font-size: 1.6rem;}
+/* #main{padding-top: 20px;
+} */
 
 /* header */
-header{  padding: 0 20px;}
 .header{
     height: var(--height-header);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0 30px;
 }
 .header__nav--title{
     font-size: 1.6rem;
@@ -30,14 +26,10 @@ header{  padding: 0 20px;}
 }
 
 /* nav */
-.col{
-    /* background-clip: content-box; */
-    font-size: 1.6rem;
-}
 .main__nav{
     /* height: 100vh; */
     height: calc(100vh - var(--height-footer) - var(--height-header));
-    border-right: 1px solid #888;
+    border-right: 1px solid var(--color-table-head);
     padding: 20px 20px 0;
 }
 .nav_item{
@@ -51,9 +43,10 @@ header{  padding: 0 20px;}
     background-color: var(--color-cyan);
 }
 /* main content*/
-.main__content{padding-top: 30px;}
+/* .main__content{padding-top: 10px;} */
 .content__item{
-    display: none;padding: 0 30px;
+    display: none;
+    padding: 0 30px;
 }
 .content__item.active{
     display: block;
@@ -62,7 +55,7 @@ header{  padding: 0 20px;}
     font-weight: 600;
 }
 /* home balance */
- .card__item{
+.card__item{
     border-radius: 5px;
     margin-top: 10px;
     padding: 20px;
@@ -79,26 +72,12 @@ header{  padding: 0 20px;}
     font-size: 1.9rem;
 }
 /* home recent activity */
-.recent__header, 
-.suggest__header, 
-.task__card--footer, 
-.task__filter--select,
-.task__item--info,
-.history__card--balance{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;    
-}
 .recent__header, .suggest__header{margin: 30px 0 20px 0;}
 .btn__recent--convert{  background-color: var(--color-submit);}
-
-/* home suggest task */
-/* .home__suggest{} */
-/* .suggest__title{} */
 .btn__suggest--read{ color: var(--color-submit);}
 
 .task__card{
-    padding: 20px !important;
+    padding: 20px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid var(--color-table-head);  
