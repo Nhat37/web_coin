@@ -37,15 +37,15 @@ th{background-color: var(--color-table-head);}
 
 /* button */
 button, .btn{
-    display: block;
+    /* display: block; */
     outline: none;
     border: none;    
     padding: 10px;
     border-radius: 5px;
     color: white;
-    cursor: pointer;
 }
 button:hover, .btn:hover{
+    cursor: pointer;
     opacity: 0.8;
 }
 .btn__outline{     
