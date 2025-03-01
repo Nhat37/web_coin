@@ -83,7 +83,7 @@
     border: 1px solid var(--color-table-head);  
     cursor: pointer;  
 }
-.task__cars--title,
+.task__card--title,
 .task__item--title{font-weight: 500;}
 .task__card--content, .task__item--text{font-size: 1.5rem; font-weight: 300;}
 .task__card--footer{
@@ -115,11 +115,12 @@
 .task__item--coin{color:var(--color-submit);font-weight: 500;}
 .task__item--time{color: var(--color-over);margin: 10px;}
     /* khi thêm class vào task__item: success, processing, over mặc định là màu blue*/
-.task__item .btn__task--submit{background-color: var(--color-submit);}
+.task__item.new .btn__task--submit{background-color: var(--color-submit);}
 .task__item.success .btn__task--submit{background-color: var(--color-success);}
 .task__item.processing .btn__task--submit{background-color: var(--color-processing);}
 .task__item.over .btn__task--submit{background-color: var(--color-over);}
-
+/* task processing  */
+.hidden{display: none;}
 /* popup-modal  when button "Nhận thưởng" (btn__task--submit)*/
 .app{position: relative;}
 .modal__wrapper{
