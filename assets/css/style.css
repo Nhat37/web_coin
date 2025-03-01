@@ -39,7 +39,7 @@
 }
 .nav_item.active, .nav_item:hover{
     border-radius: 5px;
-    border-left: 2px solid var(--color-submit);
+    border-left: 2px solid var(--color-primary);
     background-color: var(--color-cyan);
 }
 /* main content*/
@@ -73,8 +73,6 @@
 }
 /* home recent activity */
 .recent__header, .suggest__header{margin: 30px 0 20px 0;}
-.btn__recent--convert{  background-color: var(--color-submit);}
-.btn__suggest--read{ color: var(--color-submit);}
 
 .task__card{
     padding: 20px;
@@ -94,9 +92,6 @@
 /* filter task button */
 .task__filter--btn{display: flex;justify-content: space-around;}
 .task__filter--select{margin: 20px 0;}
-.btn__filter--new{background-color: var(--color-submit);}
-.btn__filter--current{color: var(--color-submit);}
-/* .task__filter--date{} */
 .task__filter--input{
     outline: none;
     border: 1px solid var(--color-card);
@@ -112,13 +107,15 @@
 }
 .task__item--text{flex: 3}
 .task__item--number{flex: 1;text-align: end;}
-.task__item--coin{color:var(--color-submit);font-weight: 500;}
-.task__item--time{color: var(--color-over);margin: 10px;}
+.task__item--coin{color:var(--color-primary);font-weight: 500;}
+.task__item--time{color: var(--color-danger);margin: 10px;}
     /* khi thêm class vào task__item: success, processing, over mặc định là màu blue*/
-.task__item.new .btn__task--submit{background-color: var(--color-submit);}
+.task__item.new .btn__task--submit{background-color: var(--color-primary);}
 .task__item.success .btn__task--submit{background-color: var(--color-success);}
-.task__item.processing .btn__task--submit{background-color: var(--color-processing);}
-.task__item.over .btn__task--submit{background-color: var(--color-over);}
+.task__item.processing .btn__task--submit{background-color: var(--color-warn);}
+.task__item.processing .btn__task--submit:hover,
+.task__item.over .btn__task--submit:hover{cursor: default !important;opacity: 1;}
+.task__item.over .btn__task--submit{background-color: var(--color-danger);}
 /* task processing  */
 .hidden{display: none;}
 /* popup-modal  when button "Nhận thưởng" (btn__task--submit)*/
@@ -152,8 +149,8 @@
     padding: 30px;
     margin: 20px 0;
 }
-.modal__btn--change{background-color: var(--color-submit);width: 50%;}
-.modal__btn--nochange{color: var(--color-submit);width: 50%;margin-top: 20px;}
+.modal__btn--change{width: 50%;}
+.modal__btn--nochange{width: 50%;margin-top: 20px;}
 /* modal convert */
 .modal__content--input{text-align: start;}
 .modal__content--input input{
@@ -179,8 +176,6 @@
     border: 1px solid var(--color-card);
     border-radius: 5px;
     padding: 5px;margin-bottom: 20px;}
-.btn__filterAll{background-color: var(--color-submit);}
-.btn__filterConvert, .btn__filterTask{color: var(--color-submit);}
 /* history table*/
 
 /* footer */
