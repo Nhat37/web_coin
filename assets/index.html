@@ -36,7 +36,7 @@
                 <div class="col l-9 m-9 c-12">
                     <div class="main__content ">
                         <!-- home -->
-                        <div class="content__item content__home active">
+                        <div class="content__item content__home ">
                                 
                             <div class="home__balance grid">
                                 <h4 class="home__balance--title">Số dư tài khoản</h4>
@@ -99,7 +99,7 @@
                                     <div class=" col l-5 m-5 c-12">
 
                                         <div class="task__card">
-                                            <div class="task__cars--title">Kiểm tra smart contract</div>
+                                            <div class="task__card--title">Kiểm tra smart contract</div>
                                             <div class="task__card--content">Kiểm tra và báo cáo lỗi của dự án ABC</div>
                                             <div class="task__card--footer f-between">
                                                 <div class="card__coin">500 Coin</div>
@@ -126,7 +126,7 @@
                         </div>
 
                         <!-- tasks list -->
-                        <div class="content__item content__task">                                
+                        <div class="content__item content__task active">                                
                             <!-- button filter -->
                             <div class="task__filter--btn">
                                 <div class="btn__filter--new btn">Nhiệm vụ mới</div>
@@ -145,39 +145,15 @@
                             <!-- task list -->
                             <div class="task__list grid">
                                 <div class="row no-gutters">
-                                    <div class=" col l-12 m-12 c-12">
-                                        
-                                        <div class="task__item">
-                                            <div class="task__item--title">Nhiệm vụ 1:</div>
+                                                                          
+                                    <div class="col l-12 m-12 c-12">                                        
+                                        <div class="task__newList"></div> 
+                                    </div>    
 
-                                            <div class="task__item--info f-between">
-                                                <div class="task__item--text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, nam dolores! Magni, inventore veniam? Animi ad in perferendis assumenda ducimus, consequuntur magnam commodi odio velit! Vero assumenda dolore dignissimos exercitationem!</div>
-                                                <div class="task__item--number">
-                                                    <div class="task__item--coin">500 coin</div>
-                                                    <div class="task__item--time">1:30:45</div>
-                                                    <button class="btn__task--submit btn" >Nhận nhiệm vụ</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    
-                                    <div class=" col l-12 m-12 c-12">
-                                        
-                                        <div class="task__item success">
-                                            <div class="task__item--title">Nhiệm vụ 1:</div>
+                                    <div class="col l-12 m-12 c-12">                                        
+                                        <div class="task__processingList hidden"></div>
+                                    </div>                                        
 
-                                            <div class="task__item--info f-between">
-                                                <div class="task__item--text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, nam dolores! Magni, inventore veniam? Animi ad in perferendis assumenda ducimus, consequuntur magnam commodi odio velit! Vero assumenda dolore dignissimos exercitationem!</div>
-                                                <div class="task__item--number">
-                                                    <div class="task__item--coin">500 coin</div>
-                                                    <div class="task__item--time">1:30:45</div>
-                                                    <button class="btn__task--submit btn" >Nhận nhiệm vụ</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
                                 </div>
                             </div>                                
 
@@ -250,7 +226,7 @@
         <div class="modal__wrapper">
             <div class="modal">
                 <div class="modal__title">Quy đổi điểm</div>
-                <form class="modal__content" action="" method="get">
+                <form class="modal__content" action="/assets/index.html" method="get">
 
                     <div class="modal__content--input">Số lượng USDT
                         <input class="input__usdt" name="input__usdt" type="number" value="0" placeholder="Nhập số điểm...">
@@ -272,14 +248,14 @@
         <div class="modal__wrapper">
             <div class="modal">
                 <div class="modal__title">Nhiệm vụ hoàn thành</div>
-                <div class="modal__content">
+                <form class="modal__content" action="/assets/index.html" method="put">
                     <div class="modal__content--text">Bạn đã hoàn thành nhiệm vụ thành công</div>
-                    <div class="modal__content--coin">+500 coin</div>
+                    <div class="modal__content--coin">+<span class="content__coin--value">500</span> coin</div>
                     <div class="modal__btn">
-                        <button class="modal__btn--change modal__btn--back">Quay lại trang chủ</button>
+                        <button class="modal__btn--change modal__btn--back" type="submit">Quay lại trang chủ</button>
                         <button class="modal__btn--nochange modal__btn--continue btn__outline" type="button">Tiếp tục làm nhiệm vụ</bu>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -291,5 +267,6 @@
         </footer>
     </div>
 </body>
+<script src="js/testAPI.js"></script>
 <script src="js/main.js"></script>
 </html>
