@@ -48,6 +48,7 @@ button, .btn{
     border-radius: 5px;
     color: white;
 }
+button:active, btn:active{background-color: var(--color-over);}
 button:hover, .btn:hover{
     cursor: pointer;
     opacity: 0.8;
