@@ -45,7 +45,7 @@
 /* .main__content{padding-top: 10px;} */
 .content__item{
     display: none;
-    padding: 0 30px;
+    margin: 0 30px;
 }
 .content__item.active{
     display: block;
@@ -88,8 +88,17 @@
     padding-top: 10px;
     border-top: 1px solid var(--color-table-head);
 }
-/* filter task button */
+/* filter task button & filter history button */
 .task__filter--btn{display: flex;justify-content: space-around;}
+.task__filter--btn .btn, .history__filterBtn button{
+    color: var(--color-primary);
+    background-color: transparent;
+    border: 1px solid currentColor;
+}
+.task__filter--btn .btn.active, .history__filterBtn button.active{
+    background-color: var(--color-primary);
+    color:white;
+}
 .task__filter--select{margin: 20px 0;}
 .task__filter--input{
     outline: none;
@@ -103,6 +112,7 @@
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 .task__item--text{flex: 3}
 .task__item--number{flex: 1;text-align: end;}
