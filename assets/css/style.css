@@ -1,14 +1,12 @@
 .app{width: 100vw;font-size: 1.6rem;}
-/* #main{padding-top: 20px;
-} */
 
 /* header */
 .header{
     height: var(--height-header);
     padding: 0 30px;
 }
-.header__nav--title{
-    font-size: 1.6rem;
+.header__nav--title h1{
+    font-size: 2.4rem;
 }
 .header__user{
     display: flex;
@@ -32,12 +30,13 @@
     border-right: 1px solid var(--color-table-head);
     padding: 20px 20px 0;
 }
-.nav_item{
+.nav__item{
     display: block;
     padding: 10px 4px;
     margin-bottom: 8px;
 }
-.nav_item.active, .nav_item:hover{
+.nav__item a{display:block;text-decoration: none;color: #333;}
+.nav__item.active, .nav__item:hover{
     border-radius: 5px;
     border-left: 2px solid var(--color-primary);
     background-color: var(--color-cyan);
@@ -109,16 +108,20 @@
 .task__item--number{flex: 1;text-align: end;}
 .task__item--coin{color:var(--color-primary);font-weight: 500;}
 .task__item--time{color: var(--color-danger);margin: 10px;}
+.task__item--footer{display: flex;justify-content: end; gap: 10px;}
     /* khi thêm class vào task__item: success, processing, over mặc định là màu blue*/
 .task__item.new .btn__task--submit{background-color: var(--color-primary);}
 .task__item.success .btn__task--submit{background-color: var(--color-success);}
 .task__item.processing .btn__task--submit{background-color: var(--color-warn);}
-.task__item.processing .btn__task--submit:hover,
 .task__item.over .btn__task--submit:hover{cursor: default !important;opacity: 1;}
-.task__item.over .btn__task--submit{background-color: var(--color-danger);}
+.task__item.over .btn__task--submit{background-color: var(--color-table-head);}
 /* task processing  */
 .hidden{display: none;}
 /* popup-modal  when button "Nhận thưởng" (btn__task--submit)*/
+@keyframes fadeIn {
+    from{ opacity: 0;}
+    to{ opacity: 1;}
+}
 .app{position: relative;}
 .modal__wrapper{
     position: fixed;
@@ -126,6 +129,8 @@
     font-size: 1.6rem;
     background-color: rgba(0, 0, 0, 0.5);
     display: none; /*flex*/
+    animation: fadeIn 0.1s linear;
+    will-change: opacity;
 }
 .modal__wrapper.modal__convert,
 .modal__wrapper.modal__award{display: flex;}
@@ -170,6 +175,7 @@
     padding: 20px;
     margin-bottom: 20px;
 }
+.card__balance--usdt{text-align: end;}
 /* history button*/
 .history__filterBtn{
     width: max-content;
