@@ -1,4 +1,4 @@
-const navItems = document.querySelectorAll('.nav_item')
+const navItems = document.querySelectorAll('.nav__item')
 const contentItems = document.querySelectorAll('.content__item')
 const navTitle = document.querySelector('.header__nav--title h1')
 
@@ -51,14 +51,14 @@ btnConvert.addEventListener('click',(e)=>{
         }
     }
 })
-//mo modal nhan thuong : "event delegation"
-document.querySelector('.task__list .row').addEventListener('click',(e)=>{
+// mở modal nhận thưởng
+document.querySelector('.task__processingList').addEventListener('click',(e)=>{
     const btnTaskSubmit = e.target.closest('.task__item.success .btn__task--submit')
     if(btnTaskSubmit){
         modalAward.classList.add("modal__award")
         // lấy số coin ở task--item
-        let taskItemNumber = btnTaskSubmit.closest('.task__item--number')
-        let coins = taskItemNumber.querySelector('.task__item--coin span').innerText
+        let taskItem = btnTaskSubmit.closest('.task__item.success')
+        let coins = taskItem.querySelector('.task__item--coin span').innerText
         // gán vào content__coin--value ở modal
         let coinModal = modalAward.querySelector('.content__coin--value')
         coinModal.innerHTML = coins
@@ -87,9 +87,14 @@ const toggleTaskList = (showNew)=>{
     document.querySelector('.task__newList').classList.toggle('hidden',!showNew)
     document.querySelector('.task__processingList').classList.toggle('hidden',showNew)
 }
-document.querySelector('.btn__filter--new').addEventListener('click',()=>toggleTaskList(true))
-document.querySelector('.btn__filter--current').addEventListener('click',()=>toggleTaskList(false))
-
+const btnFilterNew = document.querySelector('.btn__filter--new')
+const btnFilterCurrent = document.querySelector('.btn__filter--current')
+btnFilterNew.addEventListener('click',(e)=>{
+    toggleTaskList(true)
+})
+btnFilterCurrent.addEventListener('click',()=>{
+    toggleTaskList(false)
+})
 // lọc nhiệm vụ bằng select điểm thưởng, thời gian
 let selectTaskInput = document.querySelector('.task__filter--input')
 selectTaskInput.onchange = (e)=>{
@@ -118,5 +123,3 @@ selectTaskInput.onchange = (e)=>{
         taskListContainer.appendChild(task)
     })
 }
-// Note: chưa đổi lại coin--> usdt
-// chưa chuyển lại trang chủ khi bấm button ở modal
