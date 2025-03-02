@@ -87,13 +87,21 @@ const toggleTaskList = (showNew)=>{
     document.querySelector('.task__newList').classList.toggle('hidden',!showNew)
     document.querySelector('.task__processingList').classList.toggle('hidden',showNew)
 }
+// có thể dùng removeActive()
+function toggleBtnOutline(btnCurrent,btnOther,isNotOutline){
+    btnCurrent.classList.toggle('active',isNotOutline)
+    btnOther.classList.toggle('active',!isNotOutline)
+    
+}
 const btnFilterNew = document.querySelector('.btn__filter--new')
 const btnFilterCurrent = document.querySelector('.btn__filter--current')
-btnFilterNew.addEventListener('click',(e)=>{
+btnFilterNew.addEventListener('click',function(){
     toggleTaskList(true)
+    toggleBtnOutline(this,btnFilterCurrent,true) //###
 })
-btnFilterCurrent.addEventListener('click',()=>{
+btnFilterCurrent.addEventListener('click',function(){
     toggleTaskList(false)
+    toggleBtnOutline(this,btnFilterNew,true)
 })
 // lọc nhiệm vụ bằng select điểm thưởng, thời gian
 let selectTaskInput = document.querySelector('.task__filter--input')
@@ -123,3 +131,11 @@ selectTaskInput.onchange = (e)=>{
         taskListContainer.appendChild(task)
     })
 }
+// history button
+const btnFilterHistorys = document.querySelectorAll('.history__filterBtn button')
+btnFilterHistorys.forEach(btn=>{
+    btn.onclick = ()=>{
+        document.querySelector('.history__filterBtn button.active').classList.remove('active')
+        btn.classList.add('active')
+    }
+})
