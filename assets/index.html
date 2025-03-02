@@ -34,11 +34,11 @@
                 </div>
                 <!-- main content -->
                 <div class="col l-9 m-9 c-12">
-                    <div class="main__content ">
+                    <div class="main__content">
                         <!-- home -->
                         <div class="content__item content__home ">
                                 
-                            <div class="home__balance grid">
+                            <div class="home__balance ">
                                 <h4 class="home__balance--title">Số dư tài khoản</h4>
                                 <div class="home__balance--card row no-gutters">
 
@@ -129,8 +129,8 @@
                         <div class="content__item content__task active">                                
                             <!-- button filter -->
                             <div class="task__filter--btn">
-                                <div class="btn__filter--new btn btn__primary">Nhiệm vụ mới</div>
-                                <div class="btn__filter--current btn btn__outline primary">Đang thực hiện</div>
+                                <div class="btn__filter--new active btn">Nhiệm vụ mới</div>
+                                <div class="btn__filter--current btn">Đang thực hiện</div>
                             </div>
 
                             <!-- select filter -->
@@ -143,28 +143,19 @@
                             </div>
 
                             <!-- task list -->
-                            <div class="task__list grid">
-                                <div class="row no-gutters">
-                                                                          
-                                    <div class="col l-12 m-12 c-12">                                        
-                                        <div class="task__newList"></div> 
-                                    </div>    
-
-                                    <div class="col l-12 m-12 c-12">                                        
-                                        <div class="task__processingList hidden"></div>
-                                    </div>                                        
-
-                                </div>
-                            </div>                                
-
+                            <div class="task__list">                                        
+                                <div class="task__newList"></div> 
+                            
+                                <div class="task__processingList hidden"></div>                                    
+                            </div> 
                         </div>
 
                         <!-- history -->
                         <div class="content__item content__history ">
                             <div class="grid">
                                 <div class="row no-guttesr">
+                                    <!-- history: 2 card usdt, coin -->
                                     <div class="col l-12 m-12 c-12">
-
                                         <div class="history__card--balance f-between">
                                             <div class="card__balance--coin">
                                                 <p class="card__item--title">Số dư hiện tại</p>
@@ -176,18 +167,17 @@
                                                 <p class="card__item--number">258 USDT</p>
                                             </div>
                                         </div>
-
                                     </div>
+                                    <!-- history: button filter -->
                                     <div class="col l-12 m-12 c-12">
-
                                         <div class="history__filterBtn">
                                             <span>Lọc theo: </span>
-                                            <button class="btn__filterAll btn__primary" type="button">Tất cả</button>
-                                            <button class="btn__filterConvert btn__outline primary" type="button">Quy đổi</button>
-                                            <button class="btn__filterTask btn__outline primary" type="button">Nhiệm vụ</button>
+                                            <button class="btn__filterAll active" type="button">Tất cả</button>
+                                            <button class="btn__filterConvert" type="button">Quy đổi</button>
+                                            <button class="btn__filterTask" type="button">Nhiệm vụ</button>
                                         </div>
-
                                     </div>
+                                    <!-- history table -->
                                     <div class="col l-12 m-12 c-12">
                                         <table class="history__table">
                                             <thead>
