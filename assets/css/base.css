@@ -40,24 +40,28 @@ th, td{
 
 th{background-color: var(--color-table-head); }
 /* button */
-button, .btn{
-    /* display: block; */
+button, .btn, a.btn{
     outline: none;
     border: none;    
     padding: 10px;
     border-radius: 5px;
     color: white;
+    text-align: center;
 }
+a.btn{display: inline-block;}
 .btn__success{background-color: var(--color-success);}
 .btn__primary{background-color: var(--color-primary);}
 .btn__warn{background-color: var(--color-warn);}
 .btn__danger{background-color: var(--color-danger);}
+.btn__disable{background-color: var(--color-table-head);}
 
-button:active, .btn:active{background-color: var(--color-danger);}
 button:disabled, .btn:disabled{pointer-events: none;}
 button:hover, .btn:hover{
     opacity: 0.8;
+    cursor: pointer;
 }
+.btn__disable{opacity: 0.5;cursor: default;pointer-events: none !important;}
+
 .btn__outline{     
     background-color: transparent;
     border: 1px solid currentColor;
