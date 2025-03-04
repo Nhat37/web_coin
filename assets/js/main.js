@@ -21,6 +21,7 @@ navItems.forEach((item, index)=>{
         item.classList.add('active')
         contentItems[index].classList.add('active')
         navTitle.innerText = item.innerText
+        document.querySelector('input#nav__mobile').checked = false
     })
 })
 
