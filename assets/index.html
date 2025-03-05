@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website</title>
+    <link rel="stylesheet" href="">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -215,17 +216,17 @@
         </main>
 
         <!-- modal when click button convert(btn__recent--convert): add className " modal__convert" -->
-        <div class="modal__wrapper">
+        <div class="modal__wrapper ">
             <div class="modal">
                 <div class="modal__title">Quy đổi điểm</div>
-                <form class="modal__content" action="#" method="post">
+                <form class="modal__content" action="" method="">
 
-                    <div class="modal__content--input">Số lượng USDT
-                        <input class="input__usdt" name="input__usdt" type="number" value="0" placeholder="Nhập số điểm...">
+                    <div class="modal__content--input">Số lượng <span class="modal__label">USDT</span>
+                        <input class="input__from" name="input__from" type="number" value="0" placeholder="Nhập số điểm...">
                     </div>
-                    <div class="modal__content--icon">Icon convert</div>
-                    <div class="modal__content--input">Số lượng Coin
-                        <input class="input__coin" name="input__coin" type="number" disabled>                        
+                    <div class="modal__content--icon"><img src="img/sorting.png" alt="icon convert"></div>
+                    <div class="modal__content--input">Số lượng <span class="modal__label">Coin</span>
+                        <input class="input__to" name="input__to" type="number" disabled>                        
                     </div>
                     <p style="margin: 10px 0;">Tỷ lệ: 1 USDT = 100 Coin</p>
                     <div class="modal__btn">
