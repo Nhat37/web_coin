@@ -72,6 +72,8 @@ document.querySelector('.task__processingList').addEventListener('click',(e)=>{
                 modalAward.classList.remove('modal__award')
             }
         }
+        // disable btn lại để tránh nhận coin nhiều lần:)))
+        btnTaskSubmit.classList.add('btn__disable')
     }
 })
 
