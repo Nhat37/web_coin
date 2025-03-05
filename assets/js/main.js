@@ -34,14 +34,32 @@ const modalAward = modals[1]
 btnConvert.addEventListener('click',(e)=>{
     modalConvert.classList.add("modal__convert")
     const formConvert = modalConvert.querySelector('form.modal__content')
-    let inputUsdt = formConvert.querySelector('[name="input__usdt"]')
-    let inputCoin = formConvert.querySelector('[name="input__coin"]')
-    
+    let labels = formConvert.querySelectorAll(".modal__label")
+    let inputs = formConvert.querySelectorAll("input")
+    const iconSwap = formConvert.querySelector('.modal__content--icon img')
+
+    // ratio: tỉ lệ
+    function inputSwap(ratio){
+        inputs[1].value = (Number(inputs[0].value.trim())*ratio).toString()
+        inputs[0].focus()
+        inputs[0].value=""
+    }
+    // đổi chỗ label
+    function swap(labelArray){
+        let labelTemp = labelArray[0].innerText
+        labelArray[0].innerText = labelArray[1].innerText
+        labelArray[1].innerText = labelTemp
+    }
+
+    iconSwap.onclick = ()=>swap(labels)
+
     formConvert.onsubmit = (e)=>{
         e.preventDefault()
-        inputCoin.value = (Number(inputUsdt.value.trim())*100).toString()
-        inputUsdt.focus()
-        inputUsdt.value=""
+        if(labels[0].innerText.toUpperCase() === "USDT")
+            inputSwap(100)
+        else 
+            inputSwap(0.01)
+        
     }
     // dong modal khi click button "hủy"
     closeModal(modalConvert,'modal__convert',formConvert)
