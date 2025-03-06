@@ -46,6 +46,8 @@ function renderTasks(todos) {
     processingTaskList.addEventListener("click", handleProcessingTask);
     // nhiệm vụ đề xuất
     renderSuggestTasks(newTaskList)
+    // hiển thị tất cả lịch sử giao dịch
+    renderHistoryTransactions()
 }
 
 // Hàm tạo HTML cho nhiệm vụ
@@ -182,18 +184,40 @@ function createSuggestTaskHTML(newTaskList) {
 }
 
 // lịch sử giao dịch
-const transactionsData = [
+const transacionsData = [
     { id: 1, type: "convert", details: "Quy đổi USDT -> Coin", amount: "10 USDT -> 1000 Coin", time: "27/02/2025 - 10:10", status: "Thành công" },
     { id: 2, type: "convert", details: "Quy đổi Coin -> USDT", amount: "100 Coin -> 1 USDT", time: "8/03/2025 - 00:40", status: "Thành công" },
     { id: 3, type: "task", details: "Nhận thưởng", amount: "+50 Coin", time: "8/03/2025 - 07:00", status: "Thành công" }
 ];
-function renderHistoryTransactions() {
 
-    const btnFilterHistorys = document.querySelectorAll('.history__filterBtn button')
-    btnFilterHistorys.forEach(btn => {
-        btn.onclick = () => {
-            document.querySelector('.history__filterBtn button.active').classList.remove('active')
-            btn.classList.add('active')
-        }
+const tableBody = document.getElementById("transacionTable");
+const btnFilterHistorys = document.querySelectorAll('.history__filterBtn button')
+
+btnFilterHistorys.forEach(btn => {
+    btn.onclick = () => {
+        document.querySelector('.history__filterBtn button.active').classList.remove('active')
+        btn.classList.add('active')
+        
+        const filterType = btn.getAttribute("data-filter")
+        renderHistoryTransactions(filterType)
+    }
+})
+
+function renderHistoryTransactions(filterType = "all"){
+    tableBody.innerHTML = ""
+
+    const filteredTransacion = transacionsData.filter(transacion=>{
+        return filterType === "all" || transacion.type === filterType
     })
+
+    filteredTransacion.forEach(transacion=>{
+        const row = `<tr>
+            <td>${transacion.details}</td>
+            <td>${transacion.amount}</td>
+            <td>${transacion.time}</td>
+            <td>${transacion.status}</td>
+        </tr>`
+        tableBody.innerHTML += row
+    })
+    console.log(transacionsData)
 }
