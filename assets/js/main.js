@@ -124,8 +124,8 @@ btnFilterCurrent.addEventListener('click',function(){
     toggleTaskList(false)
     toggleBtnOutline(this,btnFilterNew,true)
 })
-// lọc nhiệm vụ bằng select điểm thưởng, thời gian
-let selectTaskInput = document.querySelector('.task__filter--input')
+// sắp xếp nhiệm vụ bằng select điểm thưởng, thời gian
+let selectTaskInput = document.querySelector('.task__sort--input')
 selectTaskInput.onchange = (e)=>{
     const sortBy = e.target.value
     // lấy newList ko có .hidden hoặc lấy processingList ko có .hidden
@@ -153,10 +153,3 @@ selectTaskInput.onchange = (e)=>{
     })
 }
 // history button
-const btnFilterHistorys = document.querySelectorAll('.history__filterBtn button')
-btnFilterHistorys.forEach(btn=>{
-    btn.onclick = ()=>{
-        document.querySelector('.history__filterBtn button.active').classList.remove('active')
-        btn.classList.add('active')
-    }
-})
