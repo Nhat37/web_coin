@@ -219,5 +219,4 @@ function renderHistoryTransactions(filterType = "all"){
         </tr>`
         tableBody.innerHTML += row
     })
-    console.log(transacionsData)
 }
