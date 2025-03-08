@@ -1,61 +1,77 @@
-const tasksAPI = "http://localhost:3000/tasks"
+import { createTaskHTML } from "./testAPI";
+// register
+async function register() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-start()
+    const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password })
+    });
 
-function start(){
-    getTasks(renderTasks)
+    const data = await response.json();
+    console.log("User đăng ký:", data);
 }
 
-function getTasks(callback){
-    fetch(tasksAPI)
-        .then(Response=>{
-            return Response.json()
-        })
-        .then(callback)
-        .catch(err=> console.log(err))
+// log in  
+async function login() {
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    if (data.token) {
+        localStorage.setItem("token", data.token); // Lưu token để xác thực
+        console.log("Đăng nhập thành công!");
+    } else {
+        console.log("Đăng nhập thất bại!");
+    }
 }
+// get Task List
+async function fetchTasks() {
+    const token = localStorage.getItem("token");
 
-function renderTasks(tasks){
-    const newTaskList = document.querySelector('.task__newList')
-    const processingTaskList = document.querySelector('.task__processingList')
+    const response = await fetch("http://localhost:3000/tasks", {
+        method: "GET",
+        headers: { "Authorization": `Bearer ${token}` } //xác thực với backend
+    });
 
-    newTaskList.innerHTML = tasks.map((task)=>{
-        return `<div class="col l-12 m-12 c-12">                                        
-            <div class="task__item new">
-                <div class="task__item--title">Nhiệm vụ ${task.id}:</div>
-                <div class="task__item--body f-between">
-                    <div class="task__item--text">${task.content}</div>
-                    <div class="task__item--number">
-                        <div class="task__item--coin"><span>${task.coin} </span>Coin</div>
-                        <div class="task__item--time">${task.time}</div>
-                    </div>
-                </div>
-                <div class="task__item--footer">
-                    <button class="btn__task--submit">Nhận nhiệm vụ</button>
-                    <button class="btn__task--delete btn__danger hidden">Xóa</button>
-                </div>
-            </div>                
-        </div>`
-    }).join('')
+    const tasks = await response.json();
+    document.querySelector(".task__newList").innerHTML = tasks.map(task => createTaskHTML(task, "new")).join("");
+}
+// add task
+async function addTask(taskName) {
+    const token = localStorage.getItem("token");
 
-    // function createProcessingTask(){
-    //     processingTaskList.innerHTML = todoList.map((todo)=>{            
-    //         return `<div class="col l-12 m-12 c-12">                                        
-    //             <div class="task__item ${todo.completed ? 'success' : 'over'}">
-    //                 <div class="task__item--title">Nhiệm vụ ${todo.id}:</div>
-    //                 <div class="task__item--body f-between">
-    //                     <div class="task__item--text">${todo.todo}</div>
-    //                     <div class="task__item--number">
-    //                         <div class="task__item--coin"><span>${todo.userId} </span>Coin</div>
-    //                         <div class="task__item--time">${todo.completed}</div>
-    //                     </div>
-    //                 </div>
-    //                 <div class="task__item--footer">
-    //                     <button class="btn__task--submit" data-id="${todo.id}">${todo.completed ? "Nhận thưởng" : "Quá hạn"}</button>
-    //                     <button class="btn__task--delete btn__danger" data-id="${todo.id}">Xóa</button>
-    //                 </div>
-    //             </div>                
-    //         </div>`
-    //     }).join('')
-    // }
+    const response = await fetch("http://localhost:5000/tasks", {
+        method: "POST",
+        headers: { 
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: taskName })
+    });
+
+    const newTask = await response.json();
+    console.log("Nhiệm vụ mới:", newTask);
+}
+// update
+
+// delete
+async function deleteTask(taskId) {
+    const token = localStorage.getItem("token");
+
+    await fetch(`http://localhost:5000/tasks/${taskId}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    console.log(`Nhiệm vụ ${taskId} đã bị xóa`);
 }
