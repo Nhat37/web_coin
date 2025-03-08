@@ -1,90 +1,122 @@
 {
-    "tasks": [
+  "tasks": [
+    {
+      "id": "1",
+      "content": "Do something nice for someone you care about",
+      "time": "1:20:00",
+      "coin": 140
+    },
+    {
+      "id": "2",
+      "content": "Memorize a poem",
+      "time": "1:00:00",
+      "coin": 30
+    },
+    {
+      "id": "3",
+      "content": "Watch a classic movie",
+      "time": "00:20:45",
+      "coin": 65
+    },
+    {
+      "content": "Watch a documentary",
+      "time": "0:0:45",
+      "coin": 98,
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "content": "Invest in cryptocurrency",
+      "time": "2:00:43",
+      "coin": 345
+    },
+    {
+      "id": "6",
+      "content": "Contribute code or a monetary donation to an open-source software project",
+      "time": "1:11:12",
+      "coin": 111
+    },
+    {
+      "id": "7",
+      "content": "Solve a Rubik's cube",
+      "time": "0:29:00",
+      "coin": 384
+    },
+    {
+      "id": "8",
+      "content": "Bake pastries for yourself and neighbor",
+      "time": "3:0:01",
+      "coin": 19
+    },
+    {
+      "id": "9",
+      "content": "Go see a Broadway production",
+      "time": "0:20:0",
+      "coin": 34
+    },
+    {
+      "id": "8dfc",
+      "content": "Read a math book",
+      "time": "00:15:00",
+      "coin": 154
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "hung",
+      "balance": {
+        "coin": 0,
+        "usdt": 0
+      },
+      "task_status": [
         {
-            "id": 1,
-            "content": "Do something nice for someone you care about",
-            "time": "1:20:00",
-            "coin": 140
-        },
-        {
-            "id": 2,
-            "content": "Memorize a poem",
-            "time": "1:00:00",
-            "coin": 30
-        },
-        {
-            "id": 3,
-            "content": "Watch a classic movie",
-            "time": "00:20:45",
-            "coin": 65
-        },
-        {
-            "id": 4,
-            "content": "Watch a documentary",
-            "time": "0:0:40",
-            "coin": 98
-        },
-        {
-            "id": 5,
-            "content": "Invest in cryptocurrency",
-            "time": "2:00:43",
-            "coin": 345
-        },
-        {
-            "id": 6,
-            "content": "Contribute code or a monetary donation to an open-source software project",
-            "time": "1:11:12",
-            "coin": 111
-        },
-        {
-            "id": 7,
-            "content": "Solve a Rubik's cube",
-            "time": "0:29:00",
-            "coin": 384
-        },
-        {
-            "id": 8,
-            "content": "Bake pastries for yourself and neighbor",
-            "time": "3:0:01",
-            "coin": 19
-        },
-        {
-            "id": 9,
-            "content": "Go see a Broadway production",
-            "time": "0:20:0",
-            "coin": 34
-        },
-        {
-            "id": 10,
-            "content": "Write a thank you letter to an influential person in your life",
-            "time": "0:20:0",
-            "coin": 42
+          "task_id": 1,
+          "time": "00:01:05",
+          "content": "read a math book",
+          "coin": 123,
+          "status": "processing",
+          "accepted_at": "2025-03-08T13:00:02.741Z"
         }
-    ],
-    "users": [
-        {
-            "id": 1,
-            "name": "hung",
-            "task_status": [{
-                "task_id": 1,
-                "time_left": "00:01:05",
-                "status": "processing"
-            }]
-        },
-        {
-            "id": 2,
-            "name": "tuan",
-            "task_status": []
-        },
-        {
-            "id": 3,
-            "name": "mai",
-            "task_status": []
-        },
-        {
-            "id": 4,
-            "name": "khanh",
-            "task_status": []
-        }
-    ]
+      ]
+    },
+    {
+      "id": "2",
+      "name": "tuan",
+      "balance": {
+        "coin": 0,
+        "usdt": 0
+      },
+      "task_status": []
+    },
+    {
+      "id": "3",
+      "name": "mai",
+      "balance": {
+        "coin": 0,
+        "usdt": 0
+      },
+      "task_status": []
+    },
+    {
+      "id": "9d65",
+      "name": "huy hoang",
+      "balance": {
+        "coin": 91,
+        "usdt": 0
+      }
+    },
+    {
+      "id": "0x0",
+      "name":"admin",
+      "role": "admin"
+    }
+  ],
+  "register": "",
+  "login": [
+    {
+      "name" :"admin",
+      "password": "adminpw"
+    }
+  ]
 }
