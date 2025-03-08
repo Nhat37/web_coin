@@ -1,4 +1,4 @@
-const API_USER_URL = "https://your-backend.com/api/users"; 
+const API_USER_URL = "http://localhost:3000/users"; 
 
 export async function getUsers() {
     try {
