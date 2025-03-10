@@ -18,10 +18,10 @@ function renderTasks(todos) {
     const processingTaskList = document.querySelector(".task__processingList");
 
     const fakeNewTasks = [
-        { id: 132, todo: "Do something nice for someone you care about", time: "0:3:00", coin: 152 },
-        { id: 21, todo: "Memorize a poem", time: "3:3:05", coin: 133 },
-        { id: 176, todo: "Watch a classic movie", time: "0:0:10", coin: 68 },
-        { id: 400, todo: "Watch a documentary", time: "1:3:00", coin: 84 }
+        { id: 132, content: "Do something nice for someone you care about", time: "0:3:00", coin: 152 },
+        { id: 21, content: "Memorize a poem", time: "3:3:05", coin: 133 },
+        { id: 176, content: "Watch a classic movie", time: "0:0:10", coin: 68 },
+        { id: 400, content: "Watch a documentary", time: "1:3:00", coin: 84 }
     ];
 
     const fakeUsers = [{
@@ -32,8 +32,8 @@ function renderTasks(todos) {
             coin: 0
         },
         task_status: [
-            { task_id: 10, todo: "Memorize a classic", time: "00:05:05", coin: 90, status: "over", accepted_at:"2025-03-08T07:23:02.741Z" },
-            { task_id: 12, todo: "Do something nice classic", time: "01:03:12", coin: 213, status: "new", accepted_at:"2025-03-08T07:10:02.741Z" }
+            { task_id: 10, content: "Memorize a classic", time: "00:05:05", coin: 90, status: "over", accepted_at:"2025-03-08T07:23:02.741Z" },
+            { task_id: 12, content: "Do something nice classic", time: "01:03:12", coin: 213, status: "new", accepted_at:"2025-03-08T07:10:02.741Z" }
         ]
     }];
 
@@ -68,7 +68,7 @@ export function createTaskHTML(task, status) {
             <div class="task__item ${status}" data-id="${task.id || task.task_id}" data-time="${task.time}">
                 <div class="task__item--title">Nhiệm vụ ${task.id || task.task_id}:</div>
                 <div class="task__item--body f-between">
-                    <div class="task__item--text">${task.todo}</div>
+                    <div class="task__item--text">${task.content}</div>
                     <div class="task__item--number">
                         <div class="task__item--coin"><span>${task.coin} </span>Coin</div>
                         <div class="task__item--time">${task.time}</div>
