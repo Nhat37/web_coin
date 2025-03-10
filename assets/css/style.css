@@ -122,12 +122,16 @@ label, input#nav__mobile{display: none;}
 }
 /* filter task button & filter history button */
 .task__filter--btn{display: flex;justify-content: space-around;}
-.task__filter--btn .btn, .history__filterBtn button{
+.task__filter--btn .btn, 
+.history__filterBtn button,
+.btn__pagination{
     color: var(--color-primary);
     background-color: transparent;
     border: 1px solid currentColor;
 }
-.task__filter--btn .btn.active, .history__filterBtn button.active{
+.task__filter--btn .btn.active, 
+.history__filterBtn button.active,
+.btn__pagination.active{
     background-color: var(--color-primary);
     color:white;
 }
@@ -159,6 +163,8 @@ label, input#nav__mobile{display: none;}
 .task__item.over .btn__task--submit{background-color: var(--color-table-head);}
 /* task processing  */
 .hidden{display: none;}
+/* paginate */
+.task__pagination{display: flex;gap: 10px;justify-content: center;}
 /* popup-modal  when button "Nhận thưởng" (btn__task--submit)*/
 @keyframes fadeIn {
     from{ opacity: 0;}
