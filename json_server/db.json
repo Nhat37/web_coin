@@ -108,15 +108,75 @@
     },
     {
       "id": "0x0",
-      "name":"admin",
+      "name": "admin",
       "role": "admin"
     }
   ],
   "register": "",
   "login": [
     {
-      "name" :"admin",
-      "password": "adminpw"
+      "name": "hai",
+      "password": "234iah",
+      "token": "user-token",
+      "role": "user",
+      "id": "a984"
+    },
+    {
+      "name": "nhat",
+      "password": "nhat777",
+      "token": "admin-token",
+      "role": "admin",
+      "id": "eacb"
+    },
+    {
+      "id": "a1b4",
+      "name": "hai",
+      "password": "234"
+    },
+    {
+      "id": "a8a8",
+      "name": "hai",
+      "password": ""
+    },
+    {
+      "id": "316a",
+      "name": "hai",
+      "password": "e"
+    },
+    {
+      "id": "ee75",
+      "name": "hai",
+      "password": "234"
+    },
+    {
+      "id": "abc5",
+      "name": "",
+      "password": ""
+    },
+    {
+      "id": "c3f8",
+      "name": "123",
+      "password": ""
+    },
+    {
+      "id": "65e5",
+      "name": "",
+      "password": ""
+    },
+    {
+      "id": "b949",
+      "name": "hai",
+      "password": "234iah"
+    },
+    {
+      "id": "8423",
+      "name": "hai",
+      "password": "234"
+    },
+    {
+      "id": "fd7b",
+      "name": "nhat",
+      "password": "nhat777"
     }
   ]
 }
