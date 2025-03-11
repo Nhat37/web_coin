@@ -64,7 +64,10 @@ label, input#nav__mobile{display: none;}
         background-color: #fff;
     }
     input#nav__mobile:checked~.nav__mobile{display: flex;}
-
+    .content__item{
+        min-height: calc(100vh - var(--height-header) - var(--height-footer));
+    }
+    .copy-right{font-size: 1.4rem;}
     @keyframes fadeFromRight {
         from{opacity: 0;
         transform: translateX(90%);}
@@ -78,6 +81,7 @@ label, input#nav__mobile{display: none;}
 .content__item{
     display: none;
     margin: 0 30px;
+    padding-top: 30px;
 }
 .content__item.active{
     display: block;
