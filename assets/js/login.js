@@ -22,7 +22,7 @@ document.querySelector('form').addEventListener('submit',async (e)=>{
         localStorage.setItem("name",data.name)
 
         if (data?.token === "admin-token") {
-            window.location.href = "/admin/admin.html";
+            window.location.href = "assets/html/admin.html";
         } else {
             window.location.href = "/assets/index.html";
         }
