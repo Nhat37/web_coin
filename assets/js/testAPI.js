@@ -1,43 +1,37 @@
-const todosAPI = "https://dummyjson.com/todos/1";
+// import {getTasks} from './api/taskApi.js'; 
+const BASE_URL_API = "http://localhost:3000";
 
 start();
 
 function start() {
+    renderInfoUser();
     getTasks(renderTasks);
+}
+async function renderInfoUser(){
+    const user = await getUser()
+    let userName = document.querySelector('.user__name')
+    let balanceNumbers = document.querySelectorAll('.card__item--number')
+    // let addressWallet 
+    userName.innerText = user.name || "User Name"
+    balanceNumbers[0].innerText = user.balance.coin
+    balanceNumbers[1].innerText = user.balance.usdt
+    // addressWallet.innerText = user.address_wallet
 }
 
 function getTasks(callback) {
-    fetch(todosAPI)
+    fetch(`${BASE_URL_API}/tasks`)
         .then(response => response.json())
         .then(callback)
         .catch(err => console.error("Lỗi API:", err));
 }
 
-function renderTasks(todos) {
+async function renderTasks(tasksData) {
     const newTaskList = document.querySelector(".task__newList");
     const processingTaskList = document.querySelector(".task__processingList");
-
-    const fakeNewTasks = [
-        { id: 132, content: "Do something nice for someone you care about", time: "0:3:00", coin: 152 },
-        { id: 21, content: "Memorize a poem", time: "3:3:05", coin: 133 },
-        { id: 176, content: "Watch a classic movie", time: "0:0:10", coin: 68 },
-        { id: 400, content: "Watch a documentary", time: "1:3:00", coin: 84 }
-    ];
-
-    const fakeUsers = [{
-        id: 1,
-        name: "Hai Nam",
-        balance: {
-            usdt: 0,
-            coin: 0
-        },
-        task_status: [
-            { task_id: 10, content: "Memorize a classic", time: "00:05:05", coin: 90, status: "over", accepted_at:"2025-03-08T07:23:02.741Z" },
-            { task_id: 12, content: "Do something nice classic", time: "01:03:12", coin: 213, status: "new", accepted_at:"2025-03-08T07:10:02.741Z" }
-        ]
-    }];
-
-    const fakeProcessingTasks = fakeUsers[0]["task_status"];
+    
+    const fakeNewTasks = tasksData
+    const user = await getUser()
+    const fakeProcessingTasks = user.task_status
 
     newTaskList.innerHTML = fakeNewTasks.map(task => createTaskHTML(task, "new")).join("");
     processingTaskList.innerHTML = fakeProcessingTasks.map(task => createTaskHTML(task, checkTaskStatus(task))).join("");
@@ -150,17 +144,33 @@ function startCountdown(taskItem){
 // Xử lý khi bấm vào nhiệm vụ trong "Đang thực hiện"
 function handleProcessingTask(event) {
     const taskItem = event.target.closest(".task__item");
-
+    // xóa nhiệm vụ
     if (event.target.classList.contains("btn__task--delete")) {
         let isDelete = confirm("Bạn có chắc chắn xóa nhiệm vụ này?");
         if (isDelete) {
             taskItem.remove();
         }
-    } else if (event.target.classList.contains("btn__task--submit") && taskItem.classList.contains("processing")) {
-        cancelAnimationFrame(taskItem.dataset.timerId);
-        taskItem.classList.replace("processing", "success");
-        event.target.innerText = "Nhận thưởng";
     }
+    if (event.target.classList.contains("btn__task--submit")) {
+        // cập nhật trạng thái nhiệm vụ -> success
+        if(taskItem.classList.contains("processing")){
+            cancelAnimationFrame(taskItem.dataset.timerId);
+            taskItem.classList.replace("processing", "success");
+            event.target.innerText = "Nhận thưởng";
+            return;
+        }
+        if (taskItem.classList.contains("success")){
+            handleModalAward(taskItem)   
+            // addHistoryTransacion({
+            //     type: "task",
+            //     details: "Nhận thưởng",
+            //     amount: `+55`,
+            //     time: formatDate(new Date()),
+            //     status: "Thành công"
+            // })         
+        }
+    }
+
 }
 
 // nhiệm vụ đề xuất
@@ -196,13 +206,6 @@ function createSuggestTaskHTML(newTaskList) {
 }
 
 // lịch sử giao dịch
-const transacionsData = [
-    { id: 1, type: "convert", details: "Quy đổi USDT -> Coin", amount: "10 USDT -> 1000 Coin", time: "27/02/2025 - 10:10", status: "Thành công" },
-    { id: 2, type: "convert", details: "Quy đổi Coin -> USDT", amount: "100 Coin -> 1 USDT", time: "8/03/2025 - 00:40", status: "Thành công" },
-    { id: 3, type: "task", details: "Nhận thưởng", amount: "+50 Coin", time: "8/03/2025 - 07:00", status: "Thành công" }
-];
-
-const tableBody = document.getElementById("transacionTable");
 const btnFilterHistorys = document.querySelectorAll('.history__filterBtn button')
 
 btnFilterHistorys.forEach(btn => {
@@ -215,9 +218,21 @@ btnFilterHistorys.forEach(btn => {
     }
 })
 
-function renderHistoryTransactions(filterType = "all"){
-    tableBody.innerHTML = ""
+async function getUser(){
+    try {
+        const response = await fetch(`${BASE_URL_API}/users/1`,)
+        return await response.json()
+    } catch (error) {
+        console.log(error)
+        return {}
+    }
+}
+async function renderHistoryTransactions(filterType = "all"){
+    const user = await getUser()
+    const transacionsData = user.transacion_history
 
+    const tableBody = document.getElementById("transacionTable");
+    tableBody.innerHTML = ""
     const filteredTransacion = transacionsData.filter(transacion=>{
         return filterType === "all" || transacion.type === filterType
     })
@@ -231,4 +246,48 @@ function renderHistoryTransactions(filterType = "all"){
         </tr>`
         tableBody.innerHTML += row
     })
+}
+// Thêm (cập nhật) lịch sử giao dịch
+import { formatDate } from "./main.js";
+
+async function addHistoryTransacion({type="task",details="Nhận thưởng",amount="+0",time=formatDate(new Date()),status="fail"}){
+    const new_transacion_history = {type, details, amount, time, status}
+
+    try {
+        const user = await getUser()
+        user.transacion_history.push(new_transacion_history)
+        const updateResponse = await fetch(`${BASE_URL_API}/users/1`,{
+            method: "PUT",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify(user)
+        })
+
+        if(!updateResponse.ok) throw new Error("thêm lịch sử giao dịch thất bại")
+        console.log("thêm lịch sử giao dịch thành công")
+    } catch (error) {
+        console.log(error)
+    }
+}
+import { closeModal, modalAward } from "./main.js";
+
+function handleModalAward(taskItem){
+    modalAward.classList.add("modal__award")
+    // lấy số coin ở task--item
+    let coins = taskItem.querySelector('.task__item--coin span').innerText
+    // gán vào content__coin--value ở modal
+    let coinModal = modalAward.querySelector('.content__coin--value')
+    coinModal.innerHTML = coins
+
+    // dong modal khi click vao button / vung ngoai modal
+    const formAward = modalAward.querySelector('.modal__btn')
+    closeModal(modalAward,'modal__award',formAward)
+    modalAward.onclick = (e)=>{
+        if(!e.target.closest('.modal')){
+            modalAward.classList.remove('modal__award')
+        }
+    }
+    // disable btn lại để tránh nhận coin nhiều lần:)))
+    taskItem.querySelector('.btn__task--submit').classList.add('btn__disable')
+    // cập nhật transacion history (lịch sử giao dịch)
+    
 }

@@ -28,7 +28,7 @@ navItems.forEach((item, index)=>{
 const btnConvert = document.querySelector(".btn__recent--convert")
 const modals = document.querySelectorAll(".modal__wrapper")
 const modalConvert = modals[0]
-const modalAward = modals[1]
+export const modalAward = modals[1]
 
 // mở modal convert
 btnConvert.addEventListener('click',(e)=>{
@@ -70,33 +70,9 @@ btnConvert.addEventListener('click',(e)=>{
         }
     }
 })
-// mở modal nhận thưởng
-document.querySelector('.task__processingList').addEventListener('click',(e)=>{
-    const btnTaskSubmit = e.target.closest('.task__item.success .btn__task--submit')
-    if(btnTaskSubmit){
-        modalAward.classList.add("modal__award")
-        // lấy số coin ở task--item
-        let taskItem = btnTaskSubmit.closest('.task__item.success')
-        let coins = taskItem.querySelector('.task__item--coin span').innerText
-        // gán vào content__coin--value ở modal
-        let coinModal = modalAward.querySelector('.content__coin--value')
-        coinModal.innerHTML = coins
-        
-        // dong modal khi click vao button / vung ngoai modal
-        const formAward = modalAward.querySelector('.modal__btn')
-        closeModal(modalAward,'modal__award',formAward)
-        modalAward.onclick = (e)=>{
-            if(!e.target.closest('.modal')){
-                modalAward.classList.remove('modal__award')
-            }
-        }
-        // disable btn lại để tránh nhận coin nhiều lần:)))
-        btnTaskSubmit.classList.add('btn__disable')
-    }
-})
 
 // dong modal
-function closeModal(modal,modalClass,modalForm){
+export function closeModal(modal,modalClass,modalForm){
     const btnDestroy = modalForm.querySelector('.modal__btn--nochange')
     btnDestroy.addEventListener('click',()=>{
         modal.classList.remove(modalClass)
@@ -152,4 +128,9 @@ selectTaskInput.onchange = (e)=>{
         taskListContainer.appendChild(task)
     })
 }
-// history button
+// format date
+export function formatDate(date) {
+    return new Intl.DateTimeFormat('vi-VN', { 
+        day: '2-digit', month: '2-digit', year: 'numeric' 
+    }).format(date) + " - " + date.toTimeString().slice(0, 5);
+}
