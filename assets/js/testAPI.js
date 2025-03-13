@@ -1,4 +1,3 @@
-// import {getTasks} from './api/taskApi.js'; 
 const BASE_URL_API = "http://localhost:3000";
 let currentUser = null
 

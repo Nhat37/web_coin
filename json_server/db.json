@@ -204,17 +204,24 @@
       "role": "admin"
     }
   ],
-  "register": "",
+  "register": [
+    {
+      "id": "2bce",
+      "name": "hunh",
+      "email": "minh@gmail.com",
+      "password": "1234587"
+    }
+  ],
   "login": [
     {
-      "name": "hai",
+      "email": "hai@gmai.com",
       "password": "234iah",
       "token": "user-token",
       "role": "user",
       "id": "a984"
     },
     {
-      "name": "nhat",
+      "email": "nhat@gmai.com",
       "password": "nhat777",
       "token": "admin-token",
       "role": "admin",
