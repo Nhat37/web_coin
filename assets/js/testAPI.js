@@ -1,20 +1,36 @@
 // import {getTasks} from './api/taskApi.js'; 
 const BASE_URL_API = "http://localhost:3000";
+let currentUser = null
 
 start();
 
-function start() {
-    renderInfoUser();
+async function start() {
+    await getUser();
+    await renderInfoUser();
     getTasks(renderTasks);
 }
+
+async function getUser(){
+    if(!currentUser){
+        try {
+            const response = await fetch(`${BASE_URL_API}/users/1`);
+            currentUser =  await response.json();
+            return currentUser
+        } catch (error) {
+            console.log(error);
+            return {};
+        }
+    }
+    return currentUser
+}
 async function renderInfoUser(){
-    const user = await getUser()
-    let userName = document.querySelector('.user__name')
-    let balanceNumbers = document.querySelectorAll('.card__item--number')
+    if(!currentUser) return;
+    let userName = document.querySelector('.user__name');
+    let balanceNumbers = document.querySelectorAll('.card__item--number');
     // let addressWallet 
-    userName.innerText = user.name || "User Name"
-    balanceNumbers[0].innerText = user.balance.coin
-    balanceNumbers[1].innerText = user.balance.usdt
+    userName.innerText = currentUser.name || "User Name";
+    balanceNumbers[0].innerText = currentUser?.balance?.coin || 0;
+    balanceNumbers[1].innerText = currentUser?.balance?.usdt || 0;
     // addressWallet.innerText = user.address_wallet
 }
 
@@ -29,9 +45,10 @@ async function renderTasks(tasksData) {
     const newTaskList = document.querySelector(".task__newList");
     const processingTaskList = document.querySelector(".task__processingList");
     
-    const fakeNewTasks = tasksData
-    const user = await getUser()
-    const fakeProcessingTasks = user.task_status
+    const fakeNewTasks = tasksData;
+    if(!currentUser) return;
+    if(!currentUser.task_status) currentUser.task_status = [];
+    const fakeProcessingTasks = currentUser.task_status;
 
     newTaskList.innerHTML = fakeNewTasks.map(task => createTaskHTML(task, "new")).join("");
     processingTaskList.innerHTML = fakeProcessingTasks.map(task => createTaskHTML(task, checkTaskStatus(task))).join("");
@@ -47,7 +64,9 @@ async function renderTasks(tasksData) {
     // hiển thị tất cả lịch sử giao dịch
     renderHistoryTransactions()
 }
+function renderProcessingTasks(){
 
+}
 // Hàm tạo HTML cho nhiệm vụ
 export function createTaskHTML(task, status) {
     let textBtn = {
@@ -69,7 +88,7 @@ export function createTaskHTML(task, status) {
                     </div>
                 </div>
                 <div class="task__item--footer">
-                    <button class="btn__task--submit">${textBtn}</button>
+                    <button class="btn__task--submit" type="button">${textBtn}</button>
                     <button class="btn__task--delete btn__danger ${status === 'new' ? 'hidden' : ''}">Xóa</button>
                 </div>
             </div>
@@ -144,6 +163,7 @@ function startCountdown(taskItem){
 // Xử lý khi bấm vào nhiệm vụ trong "Đang thực hiện"
 function handleProcessingTask(event) {
     const taskItem = event.target.closest(".task__item");
+    if(!taskItem) return;
     // xóa nhiệm vụ
     if (event.target.classList.contains("btn__task--delete")) {
         let isDelete = confirm("Bạn có chắc chắn xóa nhiệm vụ này?");
@@ -160,14 +180,7 @@ function handleProcessingTask(event) {
             return;
         }
         if (taskItem.classList.contains("success")){
-            handleModalAward(taskItem)   
-            // addHistoryTransacion({
-            //     type: "task",
-            //     details: "Nhận thưởng",
-            //     amount: `+55`,
-            //     time: formatDate(new Date()),
-            //     status: "Thành công"
-            // })         
+            handleModalAward(taskItem);
         }
     }
 
@@ -189,8 +202,8 @@ function createSuggestTaskHTML(newTaskList) {
     return taskItems.map((taskItem, index) => {
         let id = taskItem.dataset.id || "NA"
         let time = taskItem.dataset.time || "Not found"
-        let text = taskItem.querySelector('.task__item--text')?.innerText || "Nothing"
-        let coin = taskItem.querySelector('.task__item--coin')?.innerText || "Not found"
+        let text = taskItem.querySelector('.task__item--text').innerText || "Nothing"
+        let coin = taskItem.querySelector('.task__item--coin').innerText || "Not found"
 
         return `<div class="col l-5 ${index === 1 ? "l-o-2 m-o-2" : ""} m-5 c-12">
                     <div class="task__card">
@@ -218,18 +231,9 @@ btnFilterHistorys.forEach(btn => {
     }
 })
 
-async function getUser(){
-    try {
-        const response = await fetch(`${BASE_URL_API}/users/1`,)
-        return await response.json()
-    } catch (error) {
-        console.log(error)
-        return {}
-    }
-}
 async function renderHistoryTransactions(filterType = "all"){
-    const user = await getUser()
-    const transacionsData = user.transacion_history
+    if(!currentUser) return;
+    const transacionsData = currentUser.transacion_history || [];
 
     const tableBody = document.getElementById("transacionTable");
     tableBody.innerHTML = ""
@@ -251,19 +255,26 @@ async function renderHistoryTransactions(filterType = "all"){
 import { formatDate } from "./main.js";
 
 async function addHistoryTransacion({type="task",details="Nhận thưởng",amount="+0",time=formatDate(new Date()),status="fail"}){
+    if(!currentUser) return;
+    if(!currentUser.transacion_history) currentUser.transacion_history = [];
     const new_transacion_history = {type, details, amount, time, status}
 
     try {
-        const user = await getUser()
-        user.transacion_history.push(new_transacion_history)
+        const updatedHistory = [...currentUser.transacion_history, new_transacion_history]
+        // currentUser.transacion_history.push(new_transacion_history)
         const updateResponse = await fetch(`${BASE_URL_API}/users/1`,{
-            method: "PUT",
+            method: "PATCH",
             headers:{"Content-Type":"application/json"},
-            body: JSON.stringify(user)
+            body: JSON.stringify({transacion_history: updatedHistory}),
+            // keepalive: true,
         })
 
         if(!updateResponse.ok) throw new Error("thêm lịch sử giao dịch thất bại")
         console.log("thêm lịch sử giao dịch thành công")
+        console.log("🔎 API Response:", updateResponse);
+        console.log("🔎 Response URL:", updateResponse.url);
+        console.log("🔎 Response Status:", updateResponse.status);
+        console.log("🔎 Response Text:", await updateResponse.text());
     } catch (error) {
         console.log(error)
     }
@@ -279,8 +290,8 @@ function handleModalAward(taskItem){
     coinModal.innerHTML = coins
 
     // dong modal khi click vao button / vung ngoai modal
-    const formAward = modalAward.querySelector('.modal__btn')
-    closeModal(modalAward,'modal__award',formAward)
+    const contentAward = modalAward.querySelector('.modal__content')
+    closeModal(modalAward,'modal__award',contentAward)
     modalAward.onclick = (e)=>{
         if(!e.target.closest('.modal')){
             modalAward.classList.remove('modal__award')
@@ -289,5 +300,12 @@ function handleModalAward(taskItem){
     // disable btn lại để tránh nhận coin nhiều lần:)))
     taskItem.querySelector('.btn__task--submit').classList.add('btn__disable')
     // cập nhật transacion history (lịch sử giao dịch)
+    addHistoryTransacion({
+        type: "task",
+        details: "Nhận thưởng",
+        amount: `+${coins} coin`,
+        time: formatDate(new Date()),
+        status: "Thành công"
+    }) 
     
 }

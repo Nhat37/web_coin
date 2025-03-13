@@ -126,6 +126,41 @@
           "amount": "+55",
           "time": "11/03/2025 - 18:54",
           "status": "Thành công"
+        },
+        {
+          "type": "task",
+          "details": "Nhận thưởng",
+          "amount": "+140  coin",
+          "time": "13/03/2025 - 17:09",
+          "status": "Thành công"
+        },
+        {
+          "type": "task",
+          "details": "Nhận thưởng",
+          "amount": "+140  coin",
+          "time": "13/03/2025 - 17:10",
+          "status": "Thành công"
+        },
+        {
+          "type": "task",
+          "details": "Nhận thưởng",
+          "amount": "+100000 coin",
+          "time": "13/03/2025 - 17:30",
+          "status": "Thành công"
+        },
+        {
+          "type": "task",
+          "details": "Nhận thưởng",
+          "amount": "+140  coin",
+          "time": "13/03/2025 - 17:36",
+          "status": "Thành công"
+        },
+        {
+          "type": "task",
+          "details": "Nhận thưởng",
+          "amount": "+30  coin",
+          "time": "13/03/2025 - 17:38",
+          "status": "Thành công"
         }
       ]
     },
