@@ -134,3 +134,67 @@ export function formatDate(date) {
         day: '2-digit', month: '2-digit', year: 'numeric' 
     }).format(date) + " - " + date.toTimeString().slice(0, 5);
 }
+
+//xem tat ca index
+document.addEventListener("DOMContentLoaded", function () {
+    const viewAllTasksBtn = document.querySelector(".btn__suggest--read");
+    const homeContent = document.querySelector(".content__home");
+    const taskListContent = document.querySelector(".content__task");
+
+    if (viewAllTasksBtn && homeContent && taskListContent) {
+        viewAllTasksBtn.addEventListener("click", function () {
+            // Ẩn trang chủ
+            homeContent.classList.remove("active");
+
+            // Hiển thị danh sách nhiệm vụ
+            taskListContent.classList.add("active");
+
+            // Cuộn lên đầu trang (tùy chọn)
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+});
+//logout
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutLink = document.querySelector('.logout-link');
+    const logoutPopup = document.getElementById('logout-popup');
+    const confirmLogout = document.getElementById('confirm-logout');
+    const cancelLogout = document.getElementById('cancel-logout');
+
+    if (logoutLink) {
+        logoutLink.addEventListener('click', () => {
+            logoutPopup.style.display = "flex"; // Hiển thị popup
+        });
+
+        confirmLogout.addEventListener('click', () => {
+            window.location.href = "/assets/page/auth.html"; // Chuyển trang
+        });
+
+        cancelLogout.addEventListener('click', () => {
+            logoutPopup.style.display = "none"; // Đóng popup
+        });
+    }
+});
+// Xử lý xóa tài khoản
+document.addEventListener("DOMContentLoaded", () => {
+    const deleteLink = document.querySelector('.delete-link');
+    const deletePopup = document.getElementById('delete-popup');
+    const confirmDelete = document.getElementById('confirm-delete');
+    const cancelDelete = document.getElementById('cancel-delete');
+
+    if (deleteLink) {
+        deleteLink.addEventListener('click', () => {
+            deletePopup.style.display = "flex";
+        });
+
+        confirmDelete.addEventListener('click', () => {
+            alert("Đã xóa thành công."); 
+            deletePopup.style.display = "none";
+            window.location.href = "/assets/page/auth.html";
+        });
+
+        cancelDelete.addEventListener('click', () => {
+            deletePopup.style.display = "none";
+        });
+    }
+});
