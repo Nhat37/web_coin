@@ -1,24 +1,23 @@
 const API_LOGIN_URL = "http://localhost:3000/login"
-
+// import {BASE_URL} from './env.js'
 document.querySelector('form').addEventListener('submit',async (e)=>{
     e.preventDefault()
     const email = document.getElementById("email").value
     const password = document.getElementById("password").value
 
     try {
-        const response = await fetch(API_LOGIN_URL,{
-            method: "POST",
+        const response = await fetch(`https://82d0-118-71-62-83.ngrok-free.app/api/login`,{
+            method: "post",
             headers: {'Content-type':'application/json'},
             body: JSON.stringify({email,password})
         })
         const data = await response.json()
-      
         if(response.ok){
-            // localStorage.setItem("token",data.token)
+            localStorage.setItem("token",data.token)
             // localStorage.setItem("name",data.name)
-            localStorage.setItem("name",data.email)
+            localStorage.setItem("email",data.email)
             console.log(data.token || "no-token")
-            debugger;
+            // debugger;
             // if (data?.token === "admin-token") {
             //     alert("succesefully")
             //     window.location.href = "assets/html/admin.html";
