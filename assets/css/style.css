@@ -40,12 +40,12 @@
     border-radius: 5px;
     background-color: var(--color-cyan);
 }
-label, input#nav__mobile{display: none;}
+label.for_check, input#nav__mobile{display: none;}
 
 @media (max-width: 740px){
     .header__user{display: none;}
-    label{display: block;}
-    label img{cursor: pointer;}
+    label.for_check{display: block;}
+    label.for_check img{cursor: pointer;}
     .nav__mobile{
         min-height: 100vh;
         position: absolute;
@@ -235,6 +235,7 @@ label, input#nav__mobile{display: none;}
     border-radius: 5px;
     padding: 5px;margin-bottom: 20px;}
 /* history table*/
+/* setting */
 
 /* footer */
 .copy-right{
