@@ -5,7 +5,7 @@
     height: var(--height-header);
     padding: 0 30px;
 }
-.header__nav--title{display: flex;align-items: center;}
+.header__nav--title{display: flex;align-items: center;gap:10px}
 .header__nav--title img{padding: 5px 0;}
 .header__nav--title h1{
     font-size: 2.4rem;
@@ -88,7 +88,7 @@ label.for_check, input#nav__mobile{display: none;}
 /* .main__content{padding-top: 10px;} */
 .content__item{
     display: none;
-    margin: 0 30px;
+    margin: 0 80px;
     padding-top: 30px;
 }
 .content__item.active{

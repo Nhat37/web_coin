@@ -163,12 +163,6 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(14px);
 }
-footer{
-    text-align: center;
-    font-size:20px;
-    padding-top: 10px;
-    border-top: 1px solid #ccc;
-}
 @media (max-width: 768px) {
     .popup-content{
         margin-top: -50px;
