@@ -1,3 +1,5 @@
+import { CONFIG } from "./config.js";
+
 const wrapper = document.querySelector('.wrapper');
 const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
@@ -35,9 +37,10 @@ loginForm.addEventListener('submit', async function (e) {
     }
 
     try {
-        let response = await fetch("https://reqres.in/api/login", {
+        let response = await fetch(`${CONFIG.BASE_URL_API}/api/login`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"ngrok-skip-browser-warning":true,
+                    "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         });
         let data = await response.json();
@@ -45,7 +48,7 @@ loginForm.addEventListener('submit', async function (e) {
         if (response.ok) {
             localStorage.setItem("token", data.token);
             alert("Đăng nhập thành công!");
-            window.location.href = "../page/connect_wallet.html";
+            setTimeout(()=>window.location.href = "../index.html",1000)
         } else {
             showError(data.error || "Đăng nhập thất bại!");
         }
@@ -80,9 +83,11 @@ registerForm.addEventListener('submit', async function (e) {
     }
 
     try {
-        let response = await fetch("https://reqres.in/api/register", {
+        let response = await fetch(`${CONFIG.BASE_URL_API}/api/register`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "ngrok-skip-browser-warning":true,
+                "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         });
         let data = await response.json();
