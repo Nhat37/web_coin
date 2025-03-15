@@ -18,9 +18,7 @@
 
 .wallet-actions {
     display: flex;
-    gap: 2em;
-    width: 25%;
-    padding: 10px;
+    gap: 10px;
 }
 
 .popup {

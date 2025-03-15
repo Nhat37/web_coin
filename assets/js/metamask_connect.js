@@ -50,6 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Vui lòng nhập địa chỉ ví trước khi kết nối!");
             return;
         }
-        window.location.href = "../page/login.html";
+        window.location.href = "../page/auth.html";
     });
 });

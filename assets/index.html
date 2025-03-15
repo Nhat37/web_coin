@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <link rel="icon" href="img/logo.png">
+    <title>Mang bạn đi đến thành công!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="css/style.css">
@@ -14,7 +16,10 @@
         <!-- header -->
         <header class="grid">
             <div class="header f-between">
-                <div class="header__nav--title"><h1>Trang chủ</h1></div>
+                <div class="header__nav--title">
+                    <img src="img/logo.png" alt="logo" style="height:46px;">
+                    <h1>Slogan</h1>
+                </div>
                 <div class="header__user">
                     <div class="user__name">User Name</div>
                     <div class="user__img"></div>
@@ -29,10 +34,10 @@
                 <input type="checkbox" name="nav__mobile"  id="nav__mobile">
                 <div class="col l-3 m-3 nav__mobile">
                     <ul class="main__nav">
-                        <li class="nav__item active"><a href="#home">Trang chủ</a></li>
-                        <li class="nav__item"><a href="#task-list">Danh sách nhiệm vụ</a></li>
-                        <li class="nav__item"><a href="#history">Lịch sử giao dịch</a></li>
-                        <li class="nav__item"><a href="#settings">Cài đặt tài khoản</a></li>
+                        <li class="nav__item active"><a href="#home"><i class="fa-solid fa-house"></i>Trang chủ</a></li>
+                        <li class="nav__item"><a href="#task-list"><i class="fa-solid fa-clipboard-list"></i>Danh sách nhiệm vụ</a></li>
+                        <li class="nav__item"><a href="#history"><i class="fa-solid fa-clock-rotate-left"></i>Lịch sử giao dịch</a></li>
+                        <li class="nav__item"><a href="#settings"><i class="fa-solid fa-gear"></i>Cài đặt tài khoản</a></li>
                     </ul>
                 </div>
                 <!-- main content -->
@@ -227,7 +232,7 @@
                                     <div id="delete-popup" class="popup">
                                         <div class="popup-content">
                                             <b>Xóa tài khoản</b>
-                                            <img src="../img/danger.png" alt="cảnh báo">
+                                            <img src="img/danger.png" alt="cảnh báo">
                                             <p>Bạn có chắc chắn muốn xóa tài khoản này không?</p>
                                             <div class="popup-buttons">
                                                 <button id="cancel-delete">Hủy</button>
@@ -325,7 +330,7 @@
         </footer>
     </div>
 </body>
-<script src="js/api/user_me.js"></script>
-<!-- <script type="module" src="js/testAPI.js"></script> -->
+<!-- <script src="js/api/user_me.js"></script> -->
+<script type="module" src="js/testAPI.js"></script>
 <script type="module" src="js/main.js"></script>
 </html>
