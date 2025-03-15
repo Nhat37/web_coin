@@ -1,4 +1,4 @@
-const BASE_URL_API = "http://localhost:3000";
+import { CONFIG } from "./config.js";
 let currentUser = null
 
 start();
@@ -7,14 +7,23 @@ async function start() {
     await getUser();
     await renderInfoUser();
     getTasks(renderTasks);
+    await renderProcessingTasks();
+    console.log(currentUser);
 }
 
 async function getUser(){
+    let token = localStorage.getItem("token");
     if(!currentUser){
         try {
-            const response = await fetch(`${BASE_URL_API}/users/1`);
+            const response = await fetch(`${CONFIG.BASE_URL_API}/api/me`,{
+                method: 'GET',
+                headers: {
+                    "ngrok-skip-browser-warning":true,
+                    'Authorization': `Bearer ${token}`
+            }
+            });
             currentUser =  await response.json();
-            return currentUser
+            return currentUser;
         } catch (error) {
             console.log(error);
             return {};
@@ -28,13 +37,20 @@ async function renderInfoUser(){
     let balanceNumbers = document.querySelectorAll('.card__item--number');
     // let addressWallet 
     userName.innerText = currentUser.name || "User Name";
-    balanceNumbers[0].innerText = currentUser?.balance?.coin || 0;
-    balanceNumbers[1].innerText = currentUser?.balance?.usdt || 0;
+    balanceNumbers[0].innerText = currentUser.coins || 0;
+    balanceNumbers[1].innerText = currentUser?.usdt || 0;
     // addressWallet.innerText = user.address_wallet
 }
 
 function getTasks(callback) {
-    fetch(`${BASE_URL_API}/tasks`)
+    let token = localStorage.getItem("token");
+    fetch(`${CONFIG.BASE_URL_API}/api/daily-tasks`,{
+        method: 'GET',
+        headers: {
+            "ngrok-skip-browser-warning":true,
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then(response => response.json())
         .then(callback)
         .catch(err => console.error("Lỗi API:", err));
@@ -43,27 +59,37 @@ function getTasks(callback) {
 async function renderTasks(tasksData) {
     const newTaskList = document.querySelector(".task__newList");
     const processingTaskList = document.querySelector(".task__processingList");
-    
-    const fakeNewTasks = tasksData;
-    if(!currentUser) return;
-    if(!currentUser.task_status) currentUser.task_status = [];
-    const fakeProcessingTasks = currentUser.task_status;
 
-    newTaskList.innerHTML = fakeNewTasks.map(task => createTaskHTML(task, "new")).join("");
-    processingTaskList.innerHTML = fakeProcessingTasks.map(task => createTaskHTML(task, checkTaskStatus(task))).join("");
+    newTaskList.innerHTML = tasksData.map(task => createTaskHTML(task, "new")).join("");
 
     document.querySelectorAll(".task__item.processing").forEach(taskItem => {
         startCountdown(taskItem);
     });
 
     newTaskList.addEventListener("click", (event) => handleAddTask(event, processingTaskList));
-    processingTaskList.addEventListener("click", handleProcessingTask);
     // nhiệm vụ đề xuất
     renderSuggestTasks(newTaskList)
     // hiển thị tất cả lịch sử giao dịch
     renderHistoryTransactions()
 }
-function renderProcessingTasks(){
+// processing task
+async function renderProcessingTasks(){
+    const processingTaskList = document.querySelector(".task__processingList");
+
+    if(!currentUser) return;
+    if(!currentUser.task_status) currentUser.task_status = [];
+    const fakeProcessingTasks = currentUser.task_status || [{
+        "task_id": 1,
+        "title": "something",
+        "duration": "2030",
+        "description": "read a math book",
+        "coin_reward": 123,
+        "status": "processing",
+        "accepted_at": "2025-03-08T13:00:02.741Z"
+    }];
+
+    processingTaskList.innerHTML = fakeProcessingTasks.map(task => createTaskHTML(task, checkTaskStatus(task))).join("");
+    processingTaskList.addEventListener("click", handleProcessingTask);
 
 }
 // Hàm tạo HTML cho nhiệm vụ
@@ -77,13 +103,13 @@ export function createTaskHTML(task, status) {
 
     return `
         <div class="col l-12 m-12 c-12">
-            <div class="task__item ${status}" data-id="${task.id || task.task_id}" data-time="${task.time}">
-                <div class="task__item--title">Nhiệm vụ ${task.id || task.task_id}:</div>
+            <div class="task__item ${status}" data-id="${task.id || task.task_id}" data-time="${task.duration}">
+                <div class="task__item--title">Nhiệm vụ ${task.title}:</div>
                 <div class="task__item--body f-between">
-                    <div class="task__item--text">${task.content}</div>
+                    <div class="task__item--text">${task.description}</div>
                     <div class="task__item--number">
-                        <div class="task__item--coin"><span>${task.coin} </span>Coin</div>
-                        <div class="task__item--time">${task.time}</div>
+                        <div class="task__item--coin"><span>${task.coin_reward} </span>Coin</div>
+                        <div class="task__item--time">${showTimeTaskItem(Number(task.duration))}</div>
                     </div>
                 </div>
                 <div class="task__item--footer">
@@ -92,6 +118,14 @@ export function createTaskHTML(task, status) {
                 </div>
             </div>
         </div>`;
+}
+// showFormatTime
+function showTimeTaskItem(seconds){
+    let h = Math.floor(seconds / 3600);
+    let m = Math.floor((seconds % 3600) / 60);
+    let s = seconds % 60;
+
+    return `${h < 10 ? "0" : ""}${h}:${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
 }
 // time to seconds
 function toSeconds(timestr){
@@ -133,7 +167,8 @@ function handleAddTask(event, processingTaskList) {
 //Hàm đếm ngược (chỉ chạy với nhiệm vụ "processing")
 function startCountdown(taskItem){
     let acceptedAt = new Date(taskItem.dataset.accepted)
-    let duration = toSeconds(taskItem.dataset.time)
+    // let duration = toSeconds(taskItem.dataset.time)
+    let duration = Number(taskItem.dataset.time)
     let expiresAt = new Date(acceptedAt.getTime() + duration * 1000)
 
     function updateTimer(){
@@ -255,13 +290,14 @@ import { formatDate } from "./main.js";
 
 async function addHistoryTransacion({type="task",details="Nhận thưởng",amount="+0",time=formatDate(new Date()),status="fail"}){
     if(!currentUser) return;
+    let userId = localStorage.getItem("userId") || 1;
     if(!currentUser.transacion_history) currentUser.transacion_history = [];
     const new_transacion_history = {type, details, amount, time, status}
 
     try {
         const updatedHistory = [...currentUser.transacion_history, new_transacion_history]
         // currentUser.transacion_history.push(new_transacion_history)
-        const updateResponse = await fetch(`${BASE_URL_API}/users/1`,{
+        const updateResponse = await fetch(`${CONFIG.BASE_URL_API}/users/${userId}`,{
             method: "PATCH",
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({transacion_history: updatedHistory}),
@@ -299,12 +335,12 @@ function handleModalAward(taskItem){
     // disable btn lại để tránh nhận coin nhiều lần:)))
     taskItem.querySelector('.btn__task--submit').classList.add('btn__disable')
     // cập nhật transacion history (lịch sử giao dịch)
-    addHistoryTransacion({
-        type: "task",
-        details: "Nhận thưởng",
-        amount: `+${coins} coin`,
-        time: formatDate(new Date()),
-        status: "Thành công"
-    }) 
+    // addHistoryTransacion({
+    //     type: "task",
+    //     details: "Nhận thưởng",
+    //     amount: `+${coins} coin`,
+    //     time: formatDate(new Date()),
+    //     status: "Thành công"
+    // }) 
     
 }
