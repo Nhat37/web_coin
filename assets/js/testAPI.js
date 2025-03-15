@@ -77,7 +77,7 @@ async function renderProcessingTasks(){
     const processingTaskList = document.querySelector(".task__processingList");
 
     if(!currentUser) return;
-    if(!currentUser.task_status) currentUser.task_status = [];
+    // if(!currentUser.task_status) currentUser.task_status = [];
     const fakeProcessingTasks = currentUser.task_status || [{
         "task_id": 1,
         "title": "something",
@@ -136,7 +136,7 @@ function toSeconds(timestr){
 function checkTaskStatus(task) {
     let now = new Date();
     let acceptedAt = new Date(task.accepted_at);
-    let expiresAt = new Date(acceptedAt.getTime() + toSeconds(task.time) * 1000);
+    let expiresAt = new Date(acceptedAt.getTime() + Number(task.duration) * 1000);
     return now > expiresAt ? "over" : "processing";
 }
 // Xử lý khi bấm "Nhận nhiệm vụ"
