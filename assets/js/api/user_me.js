@@ -1,20 +1,38 @@
+import { CONFIG } from "../config.js";
+
 async function getUserInfo() {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('token');
+    if(!token){
+        window.location.href = "/assets/page/auth.html";
+        return;
+    }
 
-    const response = await fetch('http://localhost:3000/users/me', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+    try {
+        const response = await fetch(`${CONFIG.BASE_URL_API}/api/me`, {
+            method: 'GET',
+            headers: {
+                "ngrok-skip-browser-warning":true,
+                'Authorization': `Bearer ${token}`
+            }
+        });
+    
+        if (!response.ok) {
+            localStorage.removeItem("token");
+            window.location.href = "/assets/page/auth.html"
+            return;
+        } 
 
-    if (response.ok) {
         const user = await response.json();
-        console.log("User Info:", user);
-    } else {
-        console.log("Unauthorized! Redirecting to login...");
-        localStorage.removeItem('accessToken');
-        window.location.href = "/assets/login.html";
+        localStorage.setItem("userId",user.id);
+        localStorage.setItem("name",user.name);
+        if(!window.location.pathname.includes("index.html")){
+            alert("Chuyển đến index!");
+            setTimeout(()=>window.location.href = "/assets/index.html");
+        }
+
+    } catch (error) {
+        alert("Lỗi API: ",window.location.pathname,":",error);
+        window.location.href =  "/assets/index.html";
     }
 }
 
