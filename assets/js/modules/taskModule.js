@@ -18,9 +18,10 @@ taskForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(taskForm);
     const taskData = {
-        content: formData.get("content"), 
-        time: formData.get("time"),
-        coin: Number(formData.get("coin")),
+        title: formData.get("title"),
+        description: formData.get("description"), 
+        duration: formData.get("duration"),
+        coin_reward: Number(formData.get("coin_reward")),
     };
 
     if (editingTaskId) {
@@ -42,9 +43,10 @@ function addTaskToDOM(task) {
     const row = document.createElement("tr");
     row.dataset.id = task.id;
     row.innerHTML = `
-        <td>${task.content}</td> 
-        <td>${task.time}</td>
-        <td>${task.coin}</td>
+        <td>${task.title}</td> 
+        <td>${task.description}</td> 
+        <td>${task.duration}</td>
+        <td>${task.coin_reward}</td>
         <td>
             <button class="btn-update" data-id="${task.id}">Sửa</button>
             <button class="btn-delete" data-id="${task.id}">Xóa</button>
@@ -56,9 +58,10 @@ function addTaskToDOM(task) {
 function updateTaskInDOM(taskId, updatedTask) {
     const row = document.querySelector(`tr[data-id='${taskId}']`);
     if (row) {
-        row.cells[0].textContent = updatedTask.content; 
-        row.cells[1].textContent = updatedTask.time;
-        row.cells[2].textContent = updatedTask.coin;
+        row.cells[0].textContent = updatedTask.title; 
+        row.cells[1].textContent = updatedTask.description; 
+        row.cells[2].textContent = updatedTask.duration;
+        row.cells[3].textContent = updatedTask.coin_reward;
     }
 }
 
@@ -70,10 +73,11 @@ taskList.addEventListener("click", async (e) => {
     //  Sửa nhiệm vụ
     if (e.target.classList.contains("btn-update")) {
         editingTaskId = taskId; // Lưu ID nhiệm vụ đang sửa
-        taskForm.elements["content"].value = row.cells[0].textContent; 
-        taskForm.elements["time"].value = row.cells[1].textContent;
-        taskForm.elements["coin"].value = row.cells[2].textContent;
-        taskForm.elements["content"].focus();
+        taskForm.elements["title"].value = row.cells[0].textContent; 
+        taskForm.elements["description"].value = row.cells[1].textContent; 
+        taskForm.elements["duration"].value = row.cells[2].textContent;
+        taskForm.elements["coin_reward"].value = row.cells[3].textContent;
+        taskForm.elements["title"].focus();
     }
 
     // Xóa nhiệm vụ

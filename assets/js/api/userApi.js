@@ -1,8 +1,14 @@
-const API_USER_URL = "http://localhost:3000/users"; 
+import { CONFIG } from "../config.js"; 
 
 export async function getUsers() {
     try {
-        const response = await fetch(API_USER_URL);
+        const response = await fetch(`${CONFIG.BASE_URL_API}/api/users`,{
+            method: 'GET',
+            headers: {
+                "ngrok-skip-browser-warning":true,
+                // 'Authorization': `Bearer ${token}`
+            }
+        });
         return await response.json();
     } catch (error) {
         console.error("Lỗi khi lấy danh sách user:", error);
@@ -12,9 +18,11 @@ export async function getUsers() {
 
 export async function addUser(user) {
     try {
-        const response = await fetch(API_USER_URL, {
+        const response = await fetch(`${CONFIG.BASE_URL_API}/api/users`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "ngrok-skip-browser-warning":true,
+                "Content-Type": "application/json" },
             body: JSON.stringify(user),
         });
         return await response.json();
@@ -25,9 +33,11 @@ export async function addUser(user) {
 
 export async function updateUser(userId, updatedUser) {
     try {
-        const response = await fetch(`${API_USER_URL}/${userId}`, {
+        const response = await fetch(`${API_USER_URL}/api/users/${userId}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "ngrok-skip-browser-warning":true,
+                "Content-Type": "application/json" },
             body: JSON.stringify(updatedUser),
         });
         return await response.json();
@@ -38,7 +48,10 @@ export async function updateUser(userId, updatedUser) {
 
 export async function deleteUser(userId) {
     try {
-        await fetch(`${API_USER_URL}/${userId}`, { method: "DELETE" });
+        await fetch(`${API_USER_URL}/api/users/${userId}`, {
+            method: "DELETE",
+            headers: {"ngrok-skip-browser-warning":true}
+        });
     } catch (error) {
         console.error("Lỗi khi xóa user:", error);
     }

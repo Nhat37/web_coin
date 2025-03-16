@@ -1,7 +1,14 @@
-const API_URL = "http://localhost:3000/tasks"; 
+import { CONFIG } from "../config.js";
 export async function getTasks() {
+    let token = localStorage.getItem("token");
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(`${CONFIG.BASE_URL_API}/api/daily-tasks`,{
+            method: 'GET',
+            headers: {
+                "ngrok-skip-browser-warning":true,
+                'Authorization': `Bearer ${token}`
+            }
+        });
         return await response.json();
     } catch (error) {
         console.error("Lỗi khi lấy nhiệm vụ:", error);
@@ -11,9 +18,11 @@ export async function getTasks() {
 
 export async function addTask(task) {
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${CONFIG.BASE_URL_API}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "ngrok-skip-browser-warning":true,
+                "Content-Type": "application/json" },
             body: JSON.stringify(task),
         });
         return await response.json();
@@ -24,9 +33,11 @@ export async function addTask(task) {
 
 export async function updateTask(taskId, updatedTask) {
     try {
-        const response = await fetch(`${API_URL}/${taskId}`, {
+        const response = await fetch(`${CONFIG.BASE_URL_API}/${taskId}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "ngrok-skip-browser-warning":true,
+                "Content-Type": "application/json" },
             body: JSON.stringify(updatedTask),
         });
         return await response.json();
@@ -37,7 +48,12 @@ export async function updateTask(taskId, updatedTask) {
 
 export async function deleteTask(taskId) {
     try {
-        await fetch(`${API_URL}/${taskId}`, { method: "DELETE" });
+        await fetch(`${CONFIG.BASE_URL_API}/${taskId}`, { 
+            method: "DELETE",
+            headers:{
+                "ngrok-skip-browser-warning":true,
+            }
+        });
     } catch (error) {
         console.error("Lỗi khi xóa nhiệm vụ:", error);
     }
