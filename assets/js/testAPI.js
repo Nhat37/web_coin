@@ -35,11 +35,11 @@ async function renderInfoUser(){
     if(!currentUser) return;
     let userName = document.querySelector('.user__name');
     let balanceNumbers = document.querySelectorAll('.card__item--number');
-    // let addressWallet 
+    let addressWallet = document.querySelector('p.wallet-address');
     userName.innerText = currentUser.name || "User Name";
     balanceNumbers[0].innerText = currentUser.coins || 0;
     balanceNumbers[1].innerText = currentUser?.usdt || 0;
-    // addressWallet.innerText = user.address_wallet
+    addressWallet.innerText = currentUser.wallet_address || "Not Found";
 }
 
 function getTasks(callback) {
