@@ -53,3 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../page/auth.html";
     });
 });
+function goBack() {
+    window.history.back();
+}
