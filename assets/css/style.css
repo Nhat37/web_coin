@@ -9,6 +9,7 @@
 .header__nav--title img{padding: 5px 0;}
 .header__nav--title h1{
     font-size: 2.4rem;
+    text-transform: uppercase;
 }
 .header__user{
     display: flex;
@@ -42,7 +43,7 @@
     color: #333;
     padding: 10px 5px;
 }
-.nav__item a > i{margin-right: 10px;}
+.nav__item a > i{margin-right: 10px;font-size: initial;}
 .nav__item.active, .nav__item:hover{
     border-radius: 5px;
     background-color: var(--color-cyan);
@@ -74,6 +75,7 @@ label.for_check, input#nav__mobile{display: none;}
     input#nav__mobile:checked~.nav__mobile{display: flex;}
     .content__item{
         min-height: calc(100vh - var(--height-header) - var(--height-footer));
+        margin: 0 30px !important;
     }
     .copy-right{font-size: 1.4rem;}
     @keyframes fadeFromRight {
@@ -88,7 +90,7 @@ label.for_check, input#nav__mobile{display: none;}
 /* .main__content{padding-top: 10px;} */
 .content__item{
     display: none;
-    margin: 0 80px;
+    margin: 0 50px;
     padding-top: 30px;
 }
 .content__item.active{
