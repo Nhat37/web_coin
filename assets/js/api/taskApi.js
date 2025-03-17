@@ -1,12 +1,11 @@
 import { CONFIG } from "../config.js";
 export async function getTasks() {
-    let token = localStorage.getItem("token");
     try {
         const response = await fetch(`${CONFIG.BASE_URL_API}/api/daily-tasks`,{
             method: 'GET',
             headers: {
                 "ngrok-skip-browser-warning":true,
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
             }
         });
         return await response.json();
