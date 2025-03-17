@@ -1,3 +1,4 @@
+import { CONFIG } from "./config.js";
 document.addEventListener("DOMContentLoaded", function () {
     const walletInput = document.getElementById("wallet-address");
     const connectBtn = document.querySelector(".connect-btn");
@@ -44,13 +45,31 @@ document.addEventListener("DOMContentLoaded", function () {
             suggestionBox.style.display = "none";
         }
     });
+
     connectBtn.addEventListener("click", function () {
         let walletAddress = walletInput.value.trim();
         if (walletAddress === "") {
             alert("Vui lòng nhập địa chỉ ví trước khi kết nối!");
             return;
         }
-        window.location.href = "../page/auth.html";
+
+        try {
+            const response = fetch(`${CONFIG.BASE_URL_API}/api/connect-wallet`,{
+                method:"post",
+                headers:{"ngrok-skip-browser-warning": true},
+                body: JSON.stringify(walletAddress)
+            })
+            if(!response.ok){
+                alert("Địa chỉ ví có gì đó sai rồi!");
+                return;
+            }
+            const data = response.json();
+            console.log("in: ",data);
+            debugger;
+            window.location.href = "../index.html";
+        } catch (error) {
+            console.log("Lỗi Api metamask_connect: ", error);
+        }
     });
 });
 function goBack() {
